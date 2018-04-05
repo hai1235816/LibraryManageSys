@@ -11,10 +11,12 @@ namespace Lib_Mana_Sys
     public partial class Login : Form
     {
         public Main main;
+        private bool qual;
         public Login(Main m)
         {
             InitializeComponent();
             main = m;
+            qual = false;
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -24,7 +26,6 @@ namespace Lib_Mana_Sys
 
         private void confirm_Click(object sender, EventArgs e)
         {
-            bool qual = false;
             if (Vis.Checked)
             {
                 Main.user = new User("Visitor");
@@ -56,6 +57,7 @@ namespace Lib_Mana_Sys
                             {
                                 qual = true;
                                 Main.user = new User(utemp);
+                                main.updateStatus();
                                 break;
                             }
                         }
@@ -88,6 +90,29 @@ namespace Lib_Mana_Sys
         private void Login_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void Login_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!qual)
+            {
+                MessageBox.Show("用户必须登录才能继续！(可以游客身份登录)", "提示");
+                e.Cancel = true;
+            }
+        }
+
+        private void Login_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //判断用户预约的书有没有被归还，提醒用户借阅
+            if (Main.user.Reserveid > 0)
+            {
+                //需要判断下这个预约是否还有效！
+                BookMaster master = FileDate.FindObjByID<BookMaster>(Main.user.Reserveid.ToString());
+                if (master.Access_num + master.Reserved_num > 0)
+                {
+                    MessageBox.Show("你预约的书已经归还啦！快点去借阅吧", "温馨提示");
+                }
+            }
         }
     }
 }

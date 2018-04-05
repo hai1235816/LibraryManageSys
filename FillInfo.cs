@@ -11,7 +11,6 @@ namespace Lib_Mana_Sys
         {
             InitializeComponent();
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             if (AccountIDtxt.Text == "" || Passwordtxt.Text == "" || nametxt.Text == "")
@@ -29,7 +28,8 @@ namespace Lib_Mana_Sys
                 Privilege pri = Privilege.学生;
                 if (admin.Checked) pri = Privilege.管理员;
                 else if (worker.Checked) pri = Privilege.职工;
-                User user = new User(pri, AccountIDtxt.Text, nametxt.Text, Passwordtxt.Text);
+                bool ismale = Convert.ToBoolean(gender.SelectedIndex);
+                User user = new User(ismale, pri, AccountIDtxt.Text, nametxt.Text, Passwordtxt.Text);
                 FileDate.WriteInfo(user);
                 tipslb.Text = "用户信息添加成功！";
                 AccountIDtxt.Text = nametxt.Text = Passwordtxt.Text = checkPwdtxt.Text = "";
@@ -48,6 +48,23 @@ namespace Lib_Mana_Sys
         private void stu_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void AccountIDtxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char c = e.KeyChar;
+            if (c != '\b')
+            {
+                if (c < '0' || c > '9' || AccountIDtxt.Text.Length >= 12)
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void gender_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }

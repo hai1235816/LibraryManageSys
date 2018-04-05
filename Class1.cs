@@ -11,6 +11,35 @@ namespace Lib_Mana_Sys
 {
     static class FileDate
     {
+        public static void MatchRecord(OptType tp, string opt)
+        {
+            int len = 0;
+            using (FileStream fs = new FileStream("Record.dat", FileMode.Open))
+            {
+                len = (int)fs.Length / Marshal.SizeOf(typeof(Record));
+            }
+            Record rec = new Record();
+            try
+            {
+                for (int i = 1; i < len / 2; i++)
+                {
+                    rec = FileDate.ReadOne<Record>(len - i);
+                    if (rec.Optor == opt && rec.Type == tp && rec.Unmatch)
+                    {
+                        FileDate.WriteInfo(rec.findMatch(), len - i);
+                        break;
+                    }
+                }
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "系统异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         public static T ReadOne<T>(int index)where T:new()
         {
             T t = new T();
@@ -56,6 +85,24 @@ namespace Lib_Mana_Sys
             bw.Flush();
             bw.Close();
             fs.Close();
+        }
+        public static T FindObjByID<T>(string id)where T:ICheck, new()
+        {
+            try
+            {
+                for(int i=0; ; i++)
+                {
+                    if (FileDate.ReadOne<T>(i).GetID() == id)
+                    {
+                        return FileDate.ReadOne<T>(i);
+                    }
+                }
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("未找到用户信息！", "提示");
+            }
+            return new T();
         }
         private  static byte[] Struct2Byte<T>(T t)
         {
