@@ -46,7 +46,7 @@
             this.修改图书ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改密码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.冻结账号ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.查看信息ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.个人中心ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.注销登录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -69,7 +69,7 @@
             this.帮助ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(780, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(688, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -135,6 +135,7 @@
             this.添加图书ToolStripMenuItem1.Name = "添加图书ToolStripMenuItem1";
             this.添加图书ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
             this.添加图书ToolStripMenuItem1.Text = "添加图书";
+            this.添加图书ToolStripMenuItem1.Click += new System.EventHandler(this.添加图书ToolStripMenuItem1_Click);
             // 
             // 修改图书ToolStripMenuItem1
             // 
@@ -162,18 +163,20 @@
             this.书籍查询ToolStripMenuItem1.Name = "书籍查询ToolStripMenuItem1";
             this.书籍查询ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
             this.书籍查询ToolStripMenuItem1.Text = "书籍检索";
+            this.书籍查询ToolStripMenuItem1.Click += new System.EventHandler(this.书籍查询ToolStripMenuItem1_Click);
             // 
             // 书籍归还ToolStripMenuItem1
             // 
             this.书籍归还ToolStripMenuItem1.Name = "书籍归还ToolStripMenuItem1";
-            this.书籍归还ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            this.书籍归还ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.书籍归还ToolStripMenuItem1.Text = "书籍归还";
+            this.书籍归还ToolStripMenuItem1.Click += new System.EventHandler(this.书籍归还ToolStripMenuItem1_Click);
             // 
             // 书籍借阅ToolStripMenuItem
             // 
             this.书籍借阅ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.修改图书ToolStripMenuItem,
-            this.查看信息ToolStripMenuItem});
+            this.个人中心ToolStripMenuItem});
             this.书籍借阅ToolStripMenuItem.Name = "书籍借阅ToolStripMenuItem";
             this.书籍借阅ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.书籍借阅ToolStripMenuItem.Text = "安全中心";
@@ -199,12 +202,14 @@
             this.冻结账号ToolStripMenuItem.Name = "冻结账号ToolStripMenuItem";
             this.冻结账号ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.冻结账号ToolStripMenuItem.Text = "冻结账号";
+            this.冻结账号ToolStripMenuItem.Click += new System.EventHandler(this.冻结账号ToolStripMenuItem_Click);
             // 
-            // 查看信息ToolStripMenuItem
+            // 个人中心ToolStripMenuItem
             // 
-            this.查看信息ToolStripMenuItem.Name = "查看信息ToolStripMenuItem";
-            this.查看信息ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.查看信息ToolStripMenuItem.Text = "个人信息";
+            this.个人中心ToolStripMenuItem.Name = "个人中心ToolStripMenuItem";
+            this.个人中心ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.个人中心ToolStripMenuItem.Text = "个人中心";
+            this.个人中心ToolStripMenuItem.Click += new System.EventHandler(this.个人中心ToolStripMenuItem_Click);
             // 
             // 注销登录ToolStripMenuItem
             // 
@@ -229,9 +234,9 @@
             this.DateTimeStatus,
             this.toolStripStatusLabel3,
             this.PrivilegeStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 342);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 320);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(780, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(688, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -263,7 +268,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(780, 364);
+            this.ClientSize = new System.Drawing.Size(688, 342);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
@@ -305,7 +310,7 @@
         private System.Windows.Forms.ToolStripMenuItem 删除图书ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 修改图书ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 记录查询ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 查看信息ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 个人中心ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 修改密码ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 冻结账号ToolStripMenuItem;
     }

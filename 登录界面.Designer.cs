@@ -78,7 +78,7 @@
             this.PWDtxt.PasswordChar = '*';
             this.PWDtxt.Size = new System.Drawing.Size(157, 26);
             this.PWDtxt.TabIndex = 3;
-            this.PWDtxt.Text = "000000";
+            this.PWDtxt.Text = "123456";
             // 
             // Admin
             // 
@@ -142,7 +142,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(291, 348);
+            this.ClientSize = new System.Drawing.Size(286, 351);
             this.Controls.Add(this.confirm);
             this.Controls.Add(this.Vis);
             this.Controls.Add(this.Stu);
@@ -153,7 +153,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Login";
-            this.Text = "wasdwasadwa";
+            this.Text = "登录";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Login_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Login_FormClosed);
             this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

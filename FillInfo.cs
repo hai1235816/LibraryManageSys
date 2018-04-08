@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace Lib_Mana_Sys
 {
-    public partial class FillInfo : Form
+    public partial class FillInfo : Form /*,ICheck */
     {
         public FillInfo()
         {

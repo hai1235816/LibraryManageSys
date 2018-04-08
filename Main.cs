@@ -11,7 +11,7 @@ namespace Lib_Mana_Sys
     {
         public static bool priorityOver(Privilege pri)
         {
-            if (Main.user.Pri >= pri) return true;
+            if (Main.user.Pri > pri) return true;
             else
             {
                 MessageBox.Show("权限不足！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -19,77 +19,65 @@ namespace Lib_Mana_Sys
             }
         }
         public static User user;
-        public ChangePwd changePwd;
-        public FillInfo fillInfo;
+        //更新当前用户数据
+        public static void update()
+        {
+            FileDate.WriteInfo(Main.user, FileDate.GetIndex<User>(Main.user));
+        }
+        private SearchBooks searchBooks;
+        private InfoCenter infocenter;
+        private BookAdd bookAdd;
         public Login login;
-        public un_Freeze freeze;
+        private ChangePwd changePwd;
+        private FillInfo fillInfo;
+        private Freeze freeze;
+        private Unfreeze unfreeze;
         public Main()
         {
             InitializeComponent();
-            login = new Login(this);
-            if (true)
-            {
-                /*User u1 = new User(true, Privilege.学生, "16020031111", "OUCer", "123456");
+            User u1 = new User(true, Privilege.学生, "16020031111", "OUCer", "123456");
             User u2 = new User(false, Privilege.职工, "16020031231", "玉良红", "987452");
             User u3 = new User(true, Privilege.学生, "16020031561", "梁园", "654123");
             User u4 = new User(true, Privilege.管理员, "123456", "Master", "123456");
-            BookMaster t = new BookMaster();
-            FileDate.WriteInfo<BookMaster>(t);
-            if (File.Exists("User.dat"))
+            Book b1 = new Book("Java从入门到放弃", "6456516316416", "人民教育出版社", "Master", BookType.数理科学与化学, 2);
+            BookMaster master = new BookMaster(10, b1);
+            for(int i = 0; i < 10; i++)
             {
-                File.Delete("User.dat");
+                FileDate.WriteInfo(master);
             }
-            FileDate.WriteInfo(u1);
             FileDate.WriteInfo(u2);
             FileDate.WriteInfo(u3);
-            FileDate.WriteInfo(u4);*/
-            }
-            
+            FileDate.WriteInfo(u4);
+            FileDate.WriteInfo(b1);
+            FileDate.WriteInfo(u1);
+            FileDate.updateRecord();
+            login = new Login(this);
         }
         private void Main_Load(object sender, EventArgs e)
         {
             login.ShowDialog();
         }
-        //每次程序启动，都会调用这个函数把过时的预约记录清除（有效位作废）
-        public void updateRecord()
+        //每次程序启动，都会把过时的预约记录清除（有效位作废）
+        
+        public void updateStatus()
         {
-            int len = 0;
-            using(FileStream fs = new FileStream("Record.dat", FileMode.Open))
-            {
-                len = (int)fs.Length / Marshal.SizeOf(typeof(Record));
-            }
-            Record rec = new Record();
+            DateTimeStatus.Text = DateTime.Now.ToLongDateString();
+            PrivilegeStatus.Text = user.Pri.ToString();
+        }
+
+        private void 帮助ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             try
             {
-                for(int i = 1; i < len / 2 ; i++)
+                for(int i=0; ; i++)
                 {
-                    rec = FileDate.ReadOne<Record>(len - i);
-                    if(rec.Type==OptType.预约 && rec.Unmatch && rec.spanDaysToPresent() > 3)
-                    {
-                        rec.Dur = -1;
-                        rec.Unmatch = false;
-                        FileDate.WriteInfo(rec, len - i);
-                        break;
-                    }
+                    FileDate.ReadOne<Record>(i).debug();
                 }
             }
             catch (ArgumentOutOfRangeException)
             {
 
             }
-            catch(Exception e)
-            {
-                MessageBox.Show(e.Message, "系统异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        public void updateStatus()
-        {
-            DateTimeStatus.Text = DateTime.Now.ToLongDateString();
-            PrivilegeStatus.Text = user.Pri.ToString();
-        }
-        private void 帮助ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(user.ID.ToString());
         }
 
         private void 注销登录ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -118,6 +106,11 @@ namespace Lib_Mana_Sys
 
         private void 修改密码ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Main.user.Pri == Privilege.游客)
+            {
+                MessageBox.Show("游客止步", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (changePwd == null || changePwd.IsDisposed)
             {
                 if(login == null || login.IsDisposed)
@@ -134,22 +127,75 @@ namespace Lib_Mana_Sys
 
         }
 
+        //actually this one should be "账号解冻"
         private void 删除图书ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (freeze == null || freeze.IsDisposed)
+            if (Main.user.Pri == Privilege.游客)
             {
-                freeze = new un_Freeze();
+                MessageBox.Show("游客止步", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            freeze.Show();
+            if (unfreeze==null || unfreeze.IsDisposed)
+            {
+                unfreeze = new Unfreeze();
+                unfreeze.MdiParent = this;
+            }
+            unfreeze.Show();
         }
 
         private void 冻结账号ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Main.user.Pri == Privilege.游客)
+            {
+                MessageBox.Show("游客止步", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             if (freeze == null || freeze.IsDisposed)
             {
-                freeze = new un_Freeze();
+                freeze = new Freeze();
+                freeze.MdiParent = this;
             }
             freeze.Show();
+        }
+
+        private void 书籍查询ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if(searchBooks==null || searchBooks.IsDisposed)
+            {
+                searchBooks = new SearchBooks();
+                searchBooks.MdiParent = this;
+            }
+            searchBooks.Show();
+        }
+
+        private void 添加图书ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (!Main.priorityOver(Privilege.学生)) return;
+            if(bookAdd==null || bookAdd.IsDisposed)
+            {
+                bookAdd = new BookAdd();
+                bookAdd.MdiParent = this;
+            }
+            bookAdd.Show();
+        }
+
+        private void 个人中心ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (infocenter == null || infocenter.IsDisposed)
+            {
+                infocenter = new InfoCenter();
+                infocenter.MdiParent = this;
+            }
+            infocenter.Show();
+        }
+
+        private void 书籍归还ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (Main.user.Pri == Privilege.游客)
+            {
+                MessageBox.Show("游客止步", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
         }
     }
 }

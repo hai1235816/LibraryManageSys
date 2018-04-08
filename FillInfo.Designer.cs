@@ -42,6 +42,7 @@
             this.worker = new System.Windows.Forms.RadioButton();
             this.admin = new System.Windows.Forms.RadioButton();
             this.quit退出 = new System.Windows.Forms.Button();
+            this.gender = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -68,7 +69,7 @@
             // 
             this.tipslb.AutoSize = true;
             this.tipslb.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tipslb.Location = new System.Drawing.Point(47, 185);
+            this.tipslb.Location = new System.Drawing.Point(13, 184);
             this.tipslb.Name = "tipslb";
             this.tipslb.Size = new System.Drawing.Size(176, 21);
             this.tipslb.TabIndex = 2;
@@ -81,6 +82,7 @@
             this.AccountIDtxt.Name = "AccountIDtxt";
             this.AccountIDtxt.Size = new System.Drawing.Size(163, 23);
             this.AccountIDtxt.TabIndex = 1;
+            this.AccountIDtxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AccountIDtxt_KeyPress);
             // 
             // Passwordtxt
             // 
@@ -187,11 +189,26 @@
             this.quit退出.UseVisualStyleBackColor = true;
             this.quit退出.Click += new System.EventHandler(this.quit退出_Click);
             // 
+            // gender
+            // 
+            this.gender.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.gender.FormattingEnabled = true;
+            this.gender.Items.AddRange(new object[] {
+            "女",
+            "男"});
+            this.gender.Location = new System.Drawing.Point(213, 188);
+            this.gender.Name = "gender";
+            this.gender.Size = new System.Drawing.Size(76, 25);
+            this.gender.TabIndex = 15;
+            this.gender.Text = "男";
+            this.gender.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.gender_KeyPress);
+            // 
             // FillInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(300, 337);
+            this.Controls.Add(this.gender);
             this.Controls.Add(this.quit退出);
             this.Controls.Add(this.admin);
             this.Controls.Add(this.worker);
@@ -207,7 +224,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "FillInfo";
-            this.Text = "用户信息完善";
+            this.Text = "用户注册";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -229,5 +246,6 @@
         private System.Windows.Forms.RadioButton worker;
         private System.Windows.Forms.RadioButton admin;
         private System.Windows.Forms.Button quit退出;
+        private System.Windows.Forms.ComboBox gender;
     }
 }
