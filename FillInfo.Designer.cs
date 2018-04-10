@@ -40,7 +40,6 @@
             this.nametxt = new System.Windows.Forms.TextBox();
             this.stu = new System.Windows.Forms.RadioButton();
             this.worker = new System.Windows.Forms.RadioButton();
-            this.admin = new System.Windows.Forms.RadioButton();
             this.quit退出 = new System.Windows.Forms.Button();
             this.gender = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
@@ -158,25 +157,13 @@
             // 
             this.worker.AutoSize = true;
             this.worker.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.worker.Location = new System.Drawing.Point(115, 225);
+            this.worker.Location = new System.Drawing.Point(142, 225);
             this.worker.Name = "worker";
             this.worker.Size = new System.Drawing.Size(92, 25);
             this.worker.TabIndex = 13;
             this.worker.TabStop = true;
             this.worker.Text = "职工人员";
             this.worker.UseVisualStyleBackColor = true;
-            // 
-            // admin
-            // 
-            this.admin.AutoSize = true;
-            this.admin.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.admin.Location = new System.Drawing.Point(213, 225);
-            this.admin.Name = "admin";
-            this.admin.Size = new System.Drawing.Size(76, 25);
-            this.admin.TabIndex = 14;
-            this.admin.TabStop = true;
-            this.admin.Text = "管理员";
-            this.admin.UseVisualStyleBackColor = true;
             // 
             // quit退出
             // 
@@ -210,7 +197,6 @@
             this.ClientSize = new System.Drawing.Size(300, 337);
             this.Controls.Add(this.gender);
             this.Controls.Add(this.quit退出);
-            this.Controls.Add(this.admin);
             this.Controls.Add(this.worker);
             this.Controls.Add(this.stu);
             this.Controls.Add(this.nametxt);
@@ -244,7 +230,6 @@
         private System.Windows.Forms.TextBox nametxt;
         private System.Windows.Forms.RadioButton stu;
         private System.Windows.Forms.RadioButton worker;
-        private System.Windows.Forms.RadioButton admin;
         private System.Windows.Forms.Button quit退出;
         private System.Windows.Forms.ComboBox gender;
     }

@@ -27,40 +27,36 @@ namespace Lib_Mana_Sys
             }
             else
             {
-                User utemp = new User();
-                try
+                User utemp = new User(OriPwdtxt.Text.Trim());
+                if (FileDate.Exist<User>(utemp))
                 {
-                    for (int i = 0; ; i++)
+                    if (utemp.Valid)
                     {
-                        utemp = FileDate.ReadOne<User>(i);
-                        if (utemp.ID == AccountIDtxt.Text && utemp.Pwd == OriPwdtxt.Text)
-                        {
-                            if (utemp.Valid)
-                            {
-                                utemp.Pwd = NewPwdtxt.Text;
-                                FileDate.WriteInfo(utemp, i);
-                                done = true;
-                            }
-                            else
-                            {
-                                Tipslb.Text = "账号已被冻结！请首先联系管理员解除冻结状态！";
-                            }
-                            break;
-                        }
+                        utemp.Pwd = NewPwdtxt.Text;
+                        FileDate.AlterInfo(utemp);
+                        done = true;
+                    }
+                    else
+                    {
+                        Tipslb.Text = "账号已被冻结！请首先联系管理员解除冻结状态！";
                     }
                 }
-                catch (ArgumentOutOfRangeException)
+                else
                 {
                     Tipslb.Text = "未找到用户信息！请确认是否输入了正确的信息";
                 }
             }
             if (done)
             {
-                DialogResult dr = MessageBox.Show("修改密码成功！需要重新登录你的账号,是否愿意？", "提示信息:", MessageBoxButtons.OKCancel);
+                DialogResult dr = MessageBox.Show("修改密码成功！需要重新登录你的账号,是否愿意？", "提示信息:", MessageBoxButtons.OKCancel,MessageBoxIcon.Question);
                 this.Close();
                 if (dr == DialogResult.OK)
                 {
                     relog.ShowDialog();
+                }
+                else
+                {
+                    Main.user = new User("匿名游客");
                 }
             }
         }

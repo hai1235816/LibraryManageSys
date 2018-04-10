@@ -12,7 +12,7 @@ namespace Lib_Mana_Sys
 {
     public partial class Unfreeze : Form
     {
-        private int alteredOne;
+        private User utemp;
         private bool FindUser;
         public Unfreeze()
         {
@@ -20,49 +20,55 @@ namespace Lib_Mana_Sys
             FindUser = false;
         }
 
+        private bool Check()
+        {
+            if (IDtxt.Text.Length == 0)
+            {
+                state.Text = "请输入账号";
+                return false;
+            }
+            if (!FindUser)
+            {
+                state.Text = "请首先确认账号信息";
+                return false;
+            }
+            return true;
+        }
         private void search_Click(object sender, EventArgs e)
         {
             string uid = IDtxt.Text;
-            if (uid != "")
+            FindUser = FileDate.Exist<User>(new User(uid));
+            if (FindUser)
             {
-                User utemp = new User();
-                try
-                {
-                    for (int i = 0; ; i++)
-                    {
-                        utemp = FileDate.ReadOne<User>(i);
-                        if (utemp.ID == uid)
-                        {
-                            alteredOne = i;
-                            FindUser = true;
-                            state.Text = utemp.Valid ? "正常" : "被冻结";
-                            break;
-                        }
-                    }
-                }
-                catch (ArgumentOutOfRangeException)
-                {
-                    state.Text = "未找到账号相关信息";
-                }
+                utemp = FileDate.FindObjByID<User>(uid);
+                state.Text = utemp.Valid ? "正常" : "被冻结";
+            }
+            else
+            {
+                state.Text = "未找到账号相关信息";
             }
         }
 
         private void opt_Click(object sender, EventArgs e)
         {
-            if (!FindUser)
-            {
-                state.Text = "请首先确认账号信息";
-                return;
-            }
-            User utemp = FileDate.ReadOne<User>(alteredOne);
+            if (!Check()) return;
             if (!utemp.Valid)
             {
                 //如果操作者权限大于被操作者，操作有效
                 if (Main.priorityOver(utemp.Pri))
                 {
-                    FileDate.WriteInfo(utemp, alteredOne);
-                    FileDate.MatchRecord(OptType.冻结, utemp.ID);
-                    MessageBox.Show("账户解冻成功.", "通知");
+                    if (utemp.Balance < 0)
+                    {
+                        MessageBox.Show("请帮TA充值后再尝试解冻", "账户余额不足", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                    else
+                    {
+                        utemp.Valid = true;
+                        FileDate.AlterInfo(utemp);
+                        FileDate.MatchRecord(OptType.冻结, utemp.ID);
+                        MessageBox.Show("账户解冻成功.", "通知");
+                    }
                 }
             }
             else

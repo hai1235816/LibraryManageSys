@@ -22,12 +22,12 @@ namespace Lib_Mana_Sys
         //更新当前用户数据
         public static void update()
         {
-            FileDate.WriteInfo(Main.user, FileDate.GetIndex<User>(Main.user));
+            FileDate.AlterInfo(Main.user);
         }
+        public Login login;
         private SearchBooks searchBooks;
         private InfoCenter infocenter;
         private BookAdd bookAdd;
-        public Login login;
         private ChangePwd changePwd;
         private FillInfo fillInfo;
         private Freeze freeze;
@@ -35,27 +35,41 @@ namespace Lib_Mana_Sys
         public Main()
         {
             InitializeComponent();
+            if (File.Exists("Lib_Mana_Sys.User.dat"))
+            {
+                File.Delete("Lib_Mana_Sys.User.dat");
+            }
+            if (File.Exists("Lib_Mana_Sys.BookMaster.dat"))
+            {
+                File.Delete("Lib_Mana_Sys.BookMaster.dat");
+            }
+            if (File.Exists("Lib_Mana_Sys.Record.dat"))
+            {
+                File.Delete("Lib_Mana_Sys.Record.dat");
+            }
             User u1 = new User(true, Privilege.学生, "16020031111", "OUCer", "123456");
             User u2 = new User(false, Privilege.职工, "16020031231", "玉良红", "987452");
             User u3 = new User(true, Privilege.学生, "16020031561", "梁园", "654123");
             User u4 = new User(true, Privilege.管理员, "123456", "Master", "123456");
-            Book b1 = new Book("Java从入门到放弃", "6456516316416", "人民教育出版社", "Master", BookType.数理科学与化学, 2);
+            Book b1 = new Book("Java从入门到放弃", "6456516316416", "人民教育出版社", "Master", BookType.数理科学与化学);
             BookMaster master = new BookMaster(10, b1);
-            for(int i = 0; i < 10; i++)
-            {
-                FileDate.WriteInfo(master);
-            }
+            FileDate.WriteInfo(master);
+            Book b2 = new Book("C Plus从入门到入土", "1156416454652", "仁爱教育出版社", "Oh Yes", BookType.哲学宗教);
+            master = new BookMaster(6, b2);
+            FileDate.WriteInfo(master);
             FileDate.WriteInfo(u2);
             FileDate.WriteInfo(u3);
             FileDate.WriteInfo(u4);
-            FileDate.WriteInfo(b1);
             FileDate.WriteInfo(u1);
-            FileDate.updateRecord();
             login = new Login(this);
         }
         private void Main_Load(object sender, EventArgs e)
         {
             login.ShowDialog();
+            if (user.Pri != Privilege.游客)
+            {
+                user.Syncr();
+            }
         }
         //每次程序启动，都会把过时的预约记录清除（有效位作废）
         
@@ -82,7 +96,7 @@ namespace Lib_Mana_Sys
 
         private void 注销登录ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("确定注销登录？", "提示", MessageBoxButtons.OK);
+            DialogResult dr = MessageBox.Show("确定注销登录？", "提示", MessageBoxButtons.OKCancel);
             if (dr == DialogResult.OK)
             {
                 if (login.IsDisposed || login == null )
@@ -163,7 +177,7 @@ namespace Lib_Mana_Sys
             if(searchBooks==null || searchBooks.IsDisposed)
             {
                 searchBooks = new SearchBooks();
-                searchBooks.MdiParent = this;
+                //searchBooks.MdiParent = this;
             }
             searchBooks.Show();
         }

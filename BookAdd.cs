@@ -70,9 +70,22 @@ namespace Lib_Mana_Sys
         {
             if (Check())
             {
-                uint id = FileDate.AllocID<Book>();
-                Book book = new Book(bknametxt.Text, isbntxt.Text, presstxt.Text, authortxt.Text, (BookType)bkTypebox.SelectedIndex, id);
-                BookMaster master = new BookMaster(Convert.ToUInt32(NUMtxt.Text), book);
+                uint sum = Convert.ToUInt32(NUMtxt.Text);
+                Book book = new Book(bknametxt.Text, isbntxt.Text, presstxt.Text, authortxt.Text, (BookType)bkTypebox.SelectedIndex);
+                BookMaster master = new BookMaster(sum, book);
+                if (FileDate.Exist<BookMaster>(master))
+                {
+                    DialogResult dr = MessageBox.Show("此书已经存在，要直接添加吗？", "重要提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dr == DialogResult.Yes)
+                    {
+                        master.Total_num += sum;
+                        FileDate.AlterInfo<BookMaster>(master);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
                 FileDate.WriteInfo(book);
                 MessageBox.Show("书籍添加成功！", "通知");
             }

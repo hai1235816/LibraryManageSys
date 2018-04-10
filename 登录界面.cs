@@ -39,37 +39,22 @@ namespace Lib_Mana_Sys
             else
             {
                 User utemp = new User();
-                try
+                uint size = FileDate.CountOf<User>();
+                for (int i = 0; i < size ; i++)
                 {
-                    for(int i = 0; ; i++)
+                    utemp = FileDate.ReadOne<User>(i);
+                    if (utemp.ID == IDtxt.Text && utemp.Pwd == PWDtxt.Text)
                     {
-                        utemp = FileDate.ReadOne<User>(i);
-                        if (utemp.ID == IDtxt.Text && utemp.Pwd == PWDtxt.Text)
+                        if ((Stu.Checked && utemp.Pri == Privilege.学生)
+                            || (Worker.Checked && utemp.Pri == Privilege.职工)
+                            || (Admin.Checked && utemp.Pri == Privilege.管理员))
                         {
-                            if (!utemp.Valid)
-                            {
-                                MessageBox.Show("账号已被冻结！请首先联系管理员解除冻结状态！");
-                                return;
-                            }
-                            if ((Stu.Checked && utemp.Pri == Privilege.学生)
-                                || (Worker.Checked && utemp.Pri == Privilege.职工)
-                                || (Admin.Checked && utemp.Pri == Privilege.管理员))
-                            {
-                                qual = true;
-                                Main.user = new User(utemp);
-                                main.updateStatus();
-                                break;
-                            }
+                            qual = true;
+                            Main.user = new User(utemp);
+                            main.updateStatus();
+                            break;
                         }
                     }
-                }
-                catch (ArgumentOutOfRangeException)
-                {
-                    //Console.WriteLine(e.Message);
-                }
-                catch (Exception er)
-                {
-                    MessageBox.Show(er.Message);
                 }
             }
             if (qual)

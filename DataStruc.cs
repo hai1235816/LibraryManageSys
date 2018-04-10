@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -6,6 +7,7 @@ using System.Runtime.InteropServices;
 interface IGet
 {
     string GetID();
+    string GetName();
 }
 
 interface ICheck
@@ -32,14 +34,15 @@ namespace Lib_Mana_Sys
             info = book;
             master_id = book.Master_id;
         }
-        public uint Total_num { get => total_num; }
-        public uint Reserved_num { get => reserved_num; }
-        public uint Access_num { get => total_num - lent_num - reserved_num - 1; }
+        public uint Reserved_num { get => reserved_num; set => reserved_num = value; }
+        public uint Access_num { get => Total_num - lent_num - reserved_num - 1; }
         public uint Lent_num { get => lent_num; }
         public uint Master_ID { get => master_id; }
         public Book Info { get => info; }
-        public bool CanBook() { return lent_num > reserved_num; }
-        public bool CanLend() { return Access_num > 0; }
+        public bool CanBook { get => lent_num > reserved_num; }
+        //public bool CanLend { get => Access_num > 0; }
+        public uint Total_num { get => total_num; set => total_num = value; }
+
         public void beLent()
         {
             //若借书的时候已经无书可借，说明用户是来取预约的书的，否则是来正常借书的
@@ -81,7 +84,19 @@ namespace Lib_Mana_Sys
         {
 
         }
+        public bool SimiliarTo(Book book)
+        {
+            if((book.Name=="" || Info.Name.Contains(book.Name))&&
+                (book.Author==""||Info.Author.Contains(book.Author))&&
+                (book.Press == "" || Info.Press.Contains(book.Press))&&
+                (book.ISBN=="" || Info.ISBN.Contains(book.ISBN)))
+            {
+                return true;
+            }
+            return false;
+        }
         public string GetID() { return master_id.ToString(); }
+        public string GetName() { return Info.Name; }
     }
 
     public enum BookType
@@ -123,9 +138,9 @@ namespace Lib_Mana_Sys
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = ConstVar.BOOK_AUTHOR_SIZE)]
         string author;
 
-        public Book(string bname, string isbn, string publish, string auth, BookType bookType, uint id)
+        public Book(string bname, string isbn, string publish, string auth, BookType bookType)
         {
-            master_id = id;
+            master_id = FileDate.CountOf<BookMaster>() + 1;
             name = bname;
             iSBN = isbn;
             press = publish;
@@ -175,8 +190,8 @@ namespace Lib_Mana_Sys
             valid = true;
             gender = true;
             pri = Privilege.游客;
-            id = null;
-            name = visName;
+            id = visName;
+            name = visName.Trim();
             pwd = null;
             borrowBook = new uint[ConstVar.USER_BOOKBORROW_SIZE];
             reserveid = 0;
@@ -192,7 +207,7 @@ namespace Lib_Mana_Sys
             pwd = u.Pwd;
             borrowBook = new uint[ConstVar.USER_BOOKBORROW_SIZE];
             reserveid = 0;
-            balance = u.Balance;
+            balance = u.balance;
         }
         public bool Valid { get { return valid; } set { valid = value; } }
         public bool Gender { get { return gender; } }
@@ -201,77 +216,80 @@ namespace Lib_Mana_Sys
         public string Pwd { get { return pwd; } set { pwd = value; } }
         public string Name { get { return name; } set { name = value; } }
         public uint Reserveid { get => reserveid; set => reserveid = value; }
-        public float Balance { get => balance; set => balance = value; }
-        public bool ChargeVal { get => Balance >= 0.0f; }
-        public int Borrownum
+        public float Balance
         {
-            get
+            get => balance;
+            set
             {
-                int count = 0;
-                for(int i = 0; i < ConstVar.USER_BOOKBORROW_SIZE; i++)
-                {
-                    if (this[i] != 0) count++;
-                }
-                return count;
+                if (balance < 0 && value > 0) Valid = true;
+                balance = value;
+                if(balance < 0) { Valid = false; }
             }
         }
         public string GetID() { return ID; }
-        public uint this[int index]
+        public uint this[int index] { get { return borrowBook[index]; } set { borrowBook[index] = value; } }
+        public List<uint> BorrowBook
         {
             get
             {
-                if (index < 0 || index > ConstVar.USER_BOOKBORROW_SIZE - 1) return 0;
-                else return borrowBook[index];
-            }
-            set
-            {
-                if (index > -1 && index < ConstVar.USER_BOOKBORROW_SIZE)
+                List<uint> list = new List<uint>();
+                for(int i = 0; i < ConstVar.USER_BOOKBORROW_SIZE; i++)
                 {
-                    borrowBook[index] = value;
+                    if (this[i] > 0)
+                    {
+                        list.Add(this[i]);
+                    }
                 }
+                return list;
             }
         }
-        //借阅 * 预约
-        public void borrowFrom(ref BookMaster master)
+        //借阅(包含预约功能)
+        public void borrowFrom(BookMaster master)
         {
-            if (master.CanLend())
+            if (master.Access_num > 0 || Reserveid == master.Master_ID)
             {
+                uint m_id = master.Master_ID;
+                if (BorrowBook.Contains(m_id))
+                {
+                    MessageBox.Show("已经借阅了这本书，不可以再次借阅！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 for (int i = 0; i < ConstVar.USER_BOOKBORROW_SIZE; i++)
                 {
                     if (this[i] == 0)
                     {
-                        this[i] = master.Master_ID;
+                        this[i] = m_id;
                         master.beLent();
-                        if (master.Master_ID == Reserveid)
+                        if (m_id == Reserveid)
                         {
                             Reserveid = 0;
                             //用户完成预约记录
                             FileDate.MatchRecord(OptType.预约, ID);
                         }
                         //创建借阅记录
-                        FileDate.WriteInfo(new Record(OptType.借阅, ID, master.GetID(), ConstVar.BORROW_DURING_DAYS));
-                        MessageBox.Show("记得按时归还哦", "操作成功");
+                        FileDate.WriteInfo(new Record(OptType.借阅, ID, m_id.ToString(), ConstVar.BORROW_DURING_DAYS));
+                        MessageBox.Show("记得按时归还哦", "借阅成功");
                         break;
                     }
                     if (i == ConstVar.USER_BOOKBORROW_SIZE - 1)
                     {
-                        MessageBox.Show("你的借书数量达上限，不可以借阅其他书籍", "提示信息");
+                        MessageBox.Show("你的借书数量达上限，不可以借阅其他书籍", "提示信息",MessageBoxButtons.OK,MessageBoxIcon.Information);
                     }
                 }
             }
             else
             {
-                MessageBox.Show("书籍暂不可被借阅，可尝试预约或馆内阅读.", "温馨提示");
+                //若不可借阅，提示用户是否预约
+                DialogResult dr = MessageBox.Show("书籍暂不可被借阅，要预约吗？", "温馨提示",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    reserveFrom(master);
+                }
             }
         }
-        public void reserveFrom(ref BookMaster master)
+        private void reserveFrom(BookMaster master)
         {
-            if (master.Access_num > 0)
-            {
-                MessageBox.Show("馆内有可借出的书哦，现在就可以去借来啦", "温馨提示");
-                return;
-            }
-            if (master.CanBook())
+            if (master.CanBook)
             {
                 if (Reserveid == 0)
                 {
@@ -282,24 +300,63 @@ namespace Lib_Mana_Sys
                     MessageBox.Show("你的书成功被预约，记得早点来取", "预约成功");
                     return;
                 }
-                MessageBox.Show("当前预约结束前不可以预约其它书", "预约失败");
+                MessageBox.Show("当前预约结束前不可以预约其它书", "预约失败",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
             }
             else
             {
-                MessageBox.Show("借出的书已经全部被预约啦！", "下次早点来");
+                MessageBox.Show("借出的书已经全部被预约啦！", "下次早点来",MessageBoxButtons.OK);
             }
         }
-        //归还图书，从实际角度考虑，此方法一定能达到效果，不需要额外判断
-        public void givebackTo(ref BookMaster master)
+        //归还图书，从实际角度考虑，归还书籍一定能达到效果，不需要额外判断
+        public void givebackTo(BookMaster master)
         {
+            for(int i = 0; i < ConstVar.USER_BOOKBORROW_SIZE; i++)
+            {
+                if (this[i] == master.Master_ID)
+                {
+                    this[i] = 0;
+                    break;
+                }
+            }
             master.beReturned();
             FileDate.MatchRecord(OptType.借阅, ID);
         }
-        //同步自身状态，例如书籍是否逾期
+        //同步自身借书状态，判断书籍是否逾期
         public void Syncr()
         {
-
+            if (!File.Exists("Lib_Mana_Sys.Record.dat")) return;
+            Record rec;
+            int c = BorrowBook.Count;
+            for (uint len = FileDate.CountOf<Record>(); c > 0 && len > 0; len--)
+            {
+                rec = FileDate.ReadOne<Record>((int)len - 1);
+                if (rec.Optor == ID)
+                {
+                    if(rec.Unmatch && rec.Type == OptType.借阅)
+                    {
+                        int days = rec.spanDaysToPresent();
+                        if (days > 31)
+                        {
+                            Balance -= (days - rec.Dur) * ConstVar.FINE_IFNOT_RETURN_EVERYDAY;
+                        }
+                        rec.Dur = days;
+                        c--;
+                    }else if(!rec.Unmatch && rec.Type == OptType.预约 && rec.Dur > 3)
+                    {
+                        rec.Dur = -1;
+                        Balance -= ConstVar.FINE_IF_UNFINISHED;
+                        BookMaster master = FileDate.FindObjByID<BookMaster>(Reserveid.ToString());
+                        master.Reserved_num--;
+                        FileDate.AlterInfo<BookMaster>(master);
+                        Reserveid = 0;
+                        c--;
+                        MessageBox.Show("预约超时，已经自动取消！", "通知", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                }
+            }
+            FileDate.AlterInfo<User>(this);
         }
+        public string GetName() { return Name; }
     }
 
     public enum OptType { 借阅, 冻结, 预约, 损坏, 续借 };
@@ -307,7 +364,7 @@ namespace Lib_Mana_Sys
     //其它的操作如还书，解冻，完成预约，会在原来的记录上记录(unmatch为true)表示已经被完成
     //而单独存在的记录如损坏，续借，unmatch会直接设置为true
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-    struct Record
+    struct Record:IGet
     {
         //是否为历史记录
         bool unmatch;
@@ -391,6 +448,14 @@ namespace Lib_Mana_Sys
             {
                 MessageBox.Show("ERROR!");
             }
+        }
+        public string GetID()
+        {
+            return optor + objer + type.ToString() + Year.ToString() + Month.ToString() + Day.ToString();
+        }
+        public string GetName()
+        {
+            return GetID();
         }
     }
 }

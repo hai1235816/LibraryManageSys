@@ -5,153 +5,68 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Lib_Mana_Sys
 {
     static class FileDate
     {
-        public static List<Book> SearchByName(string name)
+
+        public static List<BookMaster> SearchByISBN(string isbn)
         {
-            List<Book> bklist = new List<Book>();
-            Book book = new Book();
+            BookMaster master = new BookMaster();
+            List<BookMaster> bklist = new List<BookMaster>(1);
             try
             {
-                for (int i = 0; bklist.Count < ConstVar.MAX_BOOKVIEW_NUM; i++)
+                for (int i = 0; ; i++)
                 {
-                    book = FileDate.ReadOne<BookMaster>(i).Info;
-                    if (book.Name.Contains(name))
+                    master = FileDate.ReadOne<BookMaster>(i);
+                    if (master.Info.ISBN.Contains(isbn))
                     {
-                        bklist.Add(book);
+                        bklist.Add(master);
+                        break;
                     }
                 }
             }
             catch (ArgumentException)
             {
-                return bklist;
+                MessageBox.Show("未找到该ISBN编号的书", "提示");
             }
             return bklist;
         }
-        public static List<Book> SearchByAuthor(string author)
+        //对象是否已经存在
+        public static bool Exist<T>(T t) where T:IGet,new()
         {
-            List<Book> bklist = new List<Book>();
-            Book book = new Book();
             try
             {
-                for (int i = 0; bklist.Count < ConstVar.MAX_BOOKVIEW_NUM; i++)
+                T t2 = new T();
+                for(int i=0; ; i++)
                 {
-                    book = FileDate.ReadOne<BookMaster>(i).Info;
-                    if (book.Author.Contains(author))
-                    {
-                        bklist.Add(book);
-                    }
-                }
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                return bklist;
-            }
-            return bklist;
-        }
-        public static List<Book> SearchByISBN(string isbn)
-        {
-            List<Book> bklist = new List<Book>();
-            Book book = new Book();
-            try
-            {
-                for (int i = 0; bklist.Count < ConstVar.MAX_BOOKVIEW_NUM; i++)
-                {
-                    book = FileDate.ReadOne<BookMaster>(i).Info;
-                    if (book.ISBN == isbn)
-                    {
-                        bklist.Add(book);
-                    }
+                    t2 = FileDate.ReadOne<T>(i);
+                    if (t.GetID().ToLower() == t2.GetID().ToLower() || t.GetName().ToLower() == t2.GetName().ToLower())
+                    return true;
                 }
             }
             catch (ArgumentOutOfRangeException)
             {
 
             }
-            return bklist;
-        }
-        public static List<Book> SearchByPress(string press)
-        {
-            List<Book> bklist = new List<Book>();
-            Book book = new Book();
-            try
-            {
-                for (int i = 0; bklist.Count < ConstVar.MAX_BOOKVIEW_NUM; i++)
-                {
-                    book = FileDate.ReadOne<BookMaster>(i).Info;
-                    if (book.Press.Contains(press))
-                    {
-                        bklist.Add(book);
-                    }
-                }
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-
-            }
-            return bklist;
+            return false;
         }
         //文件中对象个数
-        public static int CountOf<T>()where T:new()
-        {
-            T t = new T();
-            int len = 0;
-            using (FileStream fs = new FileStream(t.ToString() + "dat", FileMode.Open))
-            {
-                len = (int)fs.Length / Marshal.SizeOf(typeof(T));
-            }
-            return len + 1;
-        }
-        //分配一个新ID
-        public static uint AllocID<T>() where T:new()
+        public static uint CountOf<T>()where T:new()
         {
             T t = new T();
             long len = 0;
-            using(FileStream fs = new FileStream(t.ToString() + ".dat", FileMode.Open))
+            string filename = t.ToString() + ".dat";
+            if (!File.Exists(filename)) return 0;
+            using (FileStream fs = new FileStream(filename, FileMode.Open))
             {
                 len = fs.Length / Marshal.SizeOf(typeof(T));
             }
-            return Convert.ToUInt32(len + 1);
+            return Convert.ToUInt32(len);
         }
-        //查找近期的预约记录，若超过三天未来借书，此记录作废
-        public static void updateRecord()
-        {
-            if (!File.Exists("Lib_Mana_Sys.Record")) return;
-            int len = 0;
-            using (FileStream fs = new FileStream("Lib_Mana_Sys.Record.dat", FileMode.Open))
-            {
-                len = (int)fs.Length / Marshal.SizeOf(typeof(Record));
-            }
-            Record rec = new Record();
-            try
-            {
-                for (int i = 1; i < len / 2; i++)
-                {
-                    rec = FileDate.ReadOne<Record>(len - i);
-                    if (rec.Type == OptType.预约 && rec.Unmatch && rec.spanDaysToPresent() > 3)
-                    {
-                        rec.Dur = -1;
-                        rec.Unmatch = false;
-                        FileDate.WriteInfo(rec, len - i);
-                        //用户违约，扣除金额
-                        //这里相当于遍历了两次，需要优化!!!
-                        User user = FileDate.FindObjByID<User>(rec.Optor);
-                        user.Balance -= ConstVar.FINE_IF_UNFINISHED;
-                        FileDate.WriteInfo(user, FileDate.GetIndex<User>(user));
-                        break;
-                    }
-                }
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-
-            }
-        }
+        //与以前的记录匹配，成为历史记录
         public static void MatchRecord(OptType tp, string opt)
         {
             if (!File.Exists("Lib_Mana_Sys.User.dat")) return;
@@ -161,46 +76,17 @@ namespace Lib_Mana_Sys
                 len = (int)fs.Length / Marshal.SizeOf(typeof(Record));
             }
             Record rec = new Record();
-            try
+            for (int i = 1; len > 0 ; i++)
             {
-                for (int i = 1; ; i++)
+                rec = FileDate.ReadOne<Record>(len - i);
+                if (rec.Optor == opt && rec.Type == tp && rec.Unmatch)
                 {
-                    rec = FileDate.ReadOne<Record>(len - i);
-                    if (rec.Optor == opt && rec.Type == tp && rec.Unmatch)
-                    {
-                        FileDate.WriteInfo(rec.findMatch(), len - i);
-                        break;
-                    }
+                    FileDate.AlterInfo(rec.findMatch());
+                    break;
                 }
             }
-            catch (ArgumentOutOfRangeException)
-            {
-
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message, "系统异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
-        public static int GetIndex<T>(T t)where T:IGet,new()
-        {
-            try
-            {
-                T tt = new T();
-                for(int i=0; ; i++)
-                {
-                    tt = FileDate.ReadOne<T>(i);
-                    if (t.GetID()==t.GetID())
-                    {
-                        return i;
-                    }
-                }
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                return -1;
-            }
-        }
+        //根据索引读取一个对象
         public static T ReadOne<T>(int index)where T:new()
         {
             T t = new T();
@@ -215,6 +101,7 @@ namespace Lib_Mana_Sys
             }
             return t;
         }
+        //新存储一个对象
         public static void WriteInfo<T>(T t)
         {
             string filename = t.ToString() + ".dat";
@@ -234,19 +121,31 @@ namespace Lib_Mana_Sys
             bw.Close();
             fs.Close();
         }
-        public static void WriteInfo<T>(T t, int index)
+        //对象的值发生变化，更新值
+        public static void AlterInfo<T>(T t)where T:IGet,new()
         {
-            string filename = t.ToString() + ".dat";
             int structsize = Marshal.SizeOf(typeof(T));
-            FileStream fs = new FileStream(filename, FileMode.Open);
-            fs.Position = index * structsize;
-            BinaryWriter bw = new BinaryWriter(fs);
-            bw.Write(Struct2Byte<T>(t));
-
-            bw.Flush();
-            bw.Close();
-            fs.Close();
+            uint count = FileDate.CountOf<T>();
+            using(FileStream fs = new FileStream(t.ToString() + ".dat", FileMode.Open))
+            {
+                using(BinaryReader br = new BinaryReader(fs))
+                {
+                    for (uint i = 0; i < count; i++)
+                    {
+                        if (Byte2Struct<T>(br.ReadBytes(structsize)).GetID() == t.GetID())
+                        {
+                            using(BinaryWriter bw = new BinaryWriter(fs))
+                            {
+                                fs.Position -= structsize;
+                                bw.Write(Struct2Byte<T>(t));
+                            }
+                            return;
+                        }
+                    }
+                }
+            }
         }
+        //根据ID找到对象
         public static T FindObjByID<T>(string id)where T:IGet, new()
         {
             try
@@ -265,6 +164,7 @@ namespace Lib_Mana_Sys
             }
             return new T();
         }
+        //底层的文件存储函数
         private  static byte[] Struct2Byte<T>(T t)
         {
             int structSize = Marshal.SizeOf(typeof(T));
@@ -305,6 +205,7 @@ public class ConstVar
         public const int USER_NAME_SIZE = 20;
         public const int USER_BOOKBORROW_SIZE = 5;
         public const int BORROW_DURING_DAYS = 31;
-    public const int MAX_BOOKVIEW_NUM = 30;
+    //public const int MAX_BOOKVIEW_NUM = 30;
     public const float FINE_IF_UNFINISHED = 2.0f;
+    public const float FINE_IFNOT_RETURN_EVERYDAY = 1.5f;
 }

@@ -23,13 +23,17 @@ namespace Lib_Mana_Sys
                 MessageBox.Show("两次密码输入不一致！","温馨提示");
                 return;
             }
-            if (stu.Checked || worker.Checked || admin.Checked)
+            if (stu.Checked || worker.Checked)
             {
                 Privilege pri = Privilege.学生;
-                if (admin.Checked) pri = Privilege.管理员;
-                else if (worker.Checked) pri = Privilege.职工;
+                if (worker.Checked) pri = Privilege.职工;
                 bool ismale = Convert.ToBoolean(gender.SelectedIndex);
                 User user = new User(ismale, pri, AccountIDtxt.Text, nametxt.Text, Passwordtxt.Text);
+                if (FileDate.Exist<User>(user))
+                {
+                    MessageBox.Show("该用户已经存在！", "通知", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    return;
+                }
                 FileDate.WriteInfo(user);
                 tipslb.Text = "用户信息添加成功！";
                 AccountIDtxt.Text = nametxt.Text = Passwordtxt.Text = checkPwdtxt.Text = "";

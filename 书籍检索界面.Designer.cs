@@ -38,16 +38,17 @@
             this.isbn_rbtn = new System.Windows.Forms.RadioButton();
             this.press_rbtn = new System.Windows.Forms.RadioButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // bkname_rbtn
             // 
             this.bkname_rbtn.AutoSize = true;
-            this.bkname_rbtn.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.bkname_rbtn.Location = new System.Drawing.Point(19, 86);
+            this.bkname_rbtn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.bkname_rbtn.Location = new System.Drawing.Point(12, 92);
             this.bkname_rbtn.Name = "bkname_rbtn";
-            this.bkname_rbtn.Size = new System.Drawing.Size(83, 24);
+            this.bkname_rbtn.Size = new System.Drawing.Size(92, 25);
             this.bkname_rbtn.TabIndex = 0;
             this.bkname_rbtn.TabStop = true;
             this.bkname_rbtn.Text = "书名检索";
@@ -56,10 +57,10 @@
             // auth_rbtn
             // 
             this.auth_rbtn.AutoSize = true;
-            this.auth_rbtn.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.auth_rbtn.Location = new System.Drawing.Point(19, 133);
+            this.auth_rbtn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.auth_rbtn.Location = new System.Drawing.Point(12, 152);
             this.auth_rbtn.Name = "auth_rbtn";
-            this.auth_rbtn.Size = new System.Drawing.Size(83, 24);
+            this.auth_rbtn.Size = new System.Drawing.Size(92, 25);
             this.auth_rbtn.TabIndex = 1;
             this.auth_rbtn.TabStop = true;
             this.auth_rbtn.Text = "作者检索";
@@ -122,7 +123,7 @@
             "航空航天",
             "环境科学与安全科学",
             "综合性图书"});
-            this.bkTypebox.Location = new System.Drawing.Point(127, 30);
+            this.bkTypebox.Location = new System.Drawing.Point(104, 29);
             this.bkTypebox.Name = "bkTypebox";
             this.bkTypebox.Size = new System.Drawing.Size(129, 28);
             this.bkTypebox.TabIndex = 12;
@@ -133,7 +134,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(31, 32);
+            this.label2.Location = new System.Drawing.Point(8, 31);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 21);
             this.label2.TabIndex = 13;
@@ -142,10 +143,10 @@
             // isbn_rbtn
             // 
             this.isbn_rbtn.AutoSize = true;
-            this.isbn_rbtn.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.isbn_rbtn.Location = new System.Drawing.Point(19, 180);
+            this.isbn_rbtn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.isbn_rbtn.Location = new System.Drawing.Point(12, 272);
             this.isbn_rbtn.Name = "isbn_rbtn";
-            this.isbn_rbtn.Size = new System.Drawing.Size(87, 24);
+            this.isbn_rbtn.Size = new System.Drawing.Size(97, 25);
             this.isbn_rbtn.TabIndex = 14;
             this.isbn_rbtn.TabStop = true;
             this.isbn_rbtn.Text = "ISBN检索";
@@ -154,10 +155,10 @@
             // press_rbtn
             // 
             this.press_rbtn.AutoSize = true;
-            this.press_rbtn.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.press_rbtn.Location = new System.Drawing.Point(19, 224);
+            this.press_rbtn.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.press_rbtn.Location = new System.Drawing.Point(12, 212);
             this.press_rbtn.Name = "press_rbtn";
-            this.press_rbtn.Size = new System.Drawing.Size(97, 24);
+            this.press_rbtn.Size = new System.Drawing.Size(108, 25);
             this.press_rbtn.TabIndex = 15;
             this.press_rbtn.TabStop = true;
             this.press_rbtn.Text = "出版社检索";
@@ -165,21 +166,38 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.Highlight;
-            this.dataGridView1.Location = new System.Drawing.Point(186, 104);
+            this.dataGridView1.Location = new System.Drawing.Point(167, 88);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(592, 262);
             this.dataGridView1.TabIndex = 16;
+            this.dataGridView1.DoubleClick += new System.EventHandler(this.dataGridView1_DoubleClick);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(233, 65);
+            this.label3.Name = "label3";
+            this.label3.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.label3.Size = new System.Drawing.Size(107, 20);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "双击可借阅图书";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // SearchBooks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(790, 378);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.ClientSize = new System.Drawing.Size(771, 362);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.press_rbtn);
             this.Controls.Add(this.isbn_rbtn);
@@ -190,6 +208,7 @@
             this.Controls.Add(this.keywordtxt);
             this.Controls.Add(this.auth_rbtn);
             this.Controls.Add(this.bkname_rbtn);
+            this.ForeColor = System.Drawing.SystemColors.Desktop;
             this.Name = "SearchBooks";
             this.Text = "书籍检索界面";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -210,5 +229,6 @@
         private System.Windows.Forms.RadioButton isbn_rbtn;
         private System.Windows.Forms.RadioButton press_rbtn;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label3;
     }
 }

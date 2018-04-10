@@ -10,7 +10,7 @@ namespace Lib_Mana_Sys
     public partial class Freeze : Form
     {
         private bool FindUser;
-        private int alteredOne = 0;
+        private User utemp;
         public Freeze()
         {
             InitializeComponent();
@@ -21,49 +21,47 @@ namespace Lib_Mana_Sys
             this.Close();
         }
 
+        private bool Check()
+        {
+            if (!FindUser)
+            {
+                state.Text = "请首先确认账号信息";
+                return false;
+            }
+            if (IDtxt.Text.Length == 0)
+            {
+                state.Text = "请输入账号";
+                return false;
+            }
+            return true;
+        }
+
         private void search_Click(object sender, EventArgs e)
         {
             string uid = IDtxt.Text;
-            if (uid != "")
+            FindUser = FileDate.Exist<User>(new User(uid));
+            if (FindUser)
             {
-                User utemp = new User();
-                try
-                {
-                    for(int i=0; ; i++)
-                    {
-                        utemp = FileDate.ReadOne<User>(i);
-                        if (utemp.ID == uid)
-                        {
-                            alteredOne = i;
-                            FindUser = true;
-                            state.Text = utemp.Valid ? "正常" : "被冻结";
-                            break;
-                        }
-                    }
-                }
-                catch (ArgumentOutOfRangeException)
-                {
-                    state.Text = "未找到账号相关信息";
-                }
+                utemp = FileDate.FindObjByID<User>(uid);
+                state.Text = utemp.Valid ? "正常" : "被冻结";
+            }
+            else
+            {
+                state.Text = "未找到账号相关信息";
             }
         }
 
         private void opt_Click(object sender, EventArgs e)
         {
-            if (!FindUser)
-            {
-                state.Text = "请首先确认账号信息";
-                return;
-            }
+            if (!Check()) return;
             bool firm = false;
-            User utemp = FileDate.ReadOne<User>(alteredOne);
             if (utemp.Valid)
             {
                 //冻结自身账号
                 if(Main.user.ID == utemp.ID)
                 {
-                    DialogResult dr = MessageBox.Show("确定要冻结自身账号？", "重要提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                    firm = dr == DialogResult.OK;
+                    DialogResult dr = MessageBox.Show("确定要冻结自身账号？", "重要提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    firm = dr == DialogResult.Yes;
                 }
                 else
                 {
@@ -74,7 +72,7 @@ namespace Lib_Mana_Sys
                 {
                     int dur = Convert.ToInt32(Days.Text);
                     utemp.Valid = false;
-                    FileDate.WriteInfo<User>(utemp, alteredOne);
+                    FileDate.AlterInfo<User>(utemp);
                     FileDate.WriteInfo<Record>(new Record(OptType.冻结, Main.user.ID, utemp.ID, dur));
                     MessageBox.Show("冻结账户成功.", "通知");
                 }
@@ -107,6 +105,7 @@ namespace Lib_Mana_Sys
         private void IDtxt_TextChanged(object sender, EventArgs e)
         {
             FindUser = false;
+            state.Text = "等待查询";
         }
     }
 }

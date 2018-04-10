@@ -69,7 +69,7 @@
             this.帮助ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(688, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(831, 25);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -168,7 +168,7 @@
             // 书籍归还ToolStripMenuItem1
             // 
             this.书籍归还ToolStripMenuItem1.Name = "书籍归还ToolStripMenuItem1";
-            this.书籍归还ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.书籍归还ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
             this.书籍归还ToolStripMenuItem1.Text = "书籍归还";
             this.书籍归还ToolStripMenuItem1.Click += new System.EventHandler(this.书籍归还ToolStripMenuItem1_Click);
             // 
@@ -234,43 +234,48 @@
             this.DateTimeStatus,
             this.toolStripStatusLabel3,
             this.PrivilegeStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 320);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 346);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(688, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(831, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
+            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(68, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(79, 17);
             this.toolStripStatusLabel1.Text = "当前日期：";
             // 
             // DateTimeStatus
             // 
+            this.DateTimeStatus.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.DateTimeStatus.Name = "DateTimeStatus";
-            this.DateTimeStatus.Size = new System.Drawing.Size(20, 17);
+            this.DateTimeStatus.Size = new System.Drawing.Size(23, 17);
             this.DateTimeStatus.Text = "无";
             // 
             // toolStripStatusLabel3
             // 
+            this.toolStripStatusLabel3.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-            this.toolStripStatusLabel3.Size = new System.Drawing.Size(92, 17);
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(103, 17);
             this.toolStripStatusLabel3.Text = "      登录身份：";
             // 
             // PrivilegeStatus
             // 
+            this.PrivilegeStatus.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.PrivilegeStatus.Name = "PrivilegeStatus";
-            this.PrivilegeStatus.Size = new System.Drawing.Size(20, 17);
+            this.PrivilegeStatus.Size = new System.Drawing.Size(23, 17);
             this.PrivilegeStatus.Text = "空";
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(688, 342);
+            this.ClientSize = new System.Drawing.Size(831, 368);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.ForeColor = System.Drawing.Color.Purple;
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Main";
