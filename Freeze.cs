@@ -66,14 +66,16 @@ namespace Lib_Mana_Sys
                 else
                 {
                     //如果操作者权限高于被操作者，操作有效
-                    if (Main.priorityOver(utemp.Pri)) firm = true;
+                    //if (Main.priorityOver(utemp.Pri)) firm = true;
+                    //如果是管理员，操作有效
+                    firm = Main.user.Pri == Privilege.管理员;
                 }
                 if (firm)
                 {
                     int dur = Convert.ToInt32(Days.Text);
                     utemp.Valid = false;
                     FileDate.AlterInfo<User>(utemp);
-                    FileDate.WriteInfo<Record>(new Record(OptType.冻结, Main.user.ID, utemp.ID, dur));
+                    FileDate.WriteInfo<Record>(new Record(OptType.冻结, "123456", utemp.ID, dur));
                     MessageBox.Show("冻结账户成功.", "通知");
                 }
             }
@@ -90,7 +92,7 @@ namespace Lib_Mana_Sys
             char c = e.KeyChar;
             if (c != '\b')
             {
-                if (c < '0' || c > '9' || IDtxt.Text.Length >= 12)
+                if (c < '0' || c > '9' || IDtxt.Text.Length >= ConstVar.USER_ID_SIZE)
                 {
                     e.Handled = true;
                 }
@@ -99,7 +101,15 @@ namespace Lib_Mana_Sys
 
         private void Days_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = true;
+            char c = e.KeyChar;
+            if (c != '\b')
+            {
+                int len = Days.Text.Length;
+                if ((c < '0' || c > '9' || len >= 2) || ( c=='0' && len == 0 ))
+                {
+                    e.Handled = true;
+                }
+            }
         }
 
         private void IDtxt_TextChanged(object sender, EventArgs e)

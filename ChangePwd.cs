@@ -71,5 +71,41 @@ namespace Lib_Mana_Sys
             AccountIDtxt.Text = OriPwdtxt.Text = NewPwdtxt.Text = RepeatPwdtxt.Text = "";
             Tipslb.Text = "建议新密码不要与原密码一致";
         }
+
+        private void AccountIDtxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char c = e.KeyChar;
+            if (c != '\b')
+            {
+                if (c < '0' || c > '9' || AccountIDtxt.Text.Length >= ConstVar.USER_NAME_SIZE)
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void OriPwdtxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ' ' || OriPwdtxt.Text.Length >= ConstVar.USER_PWD_SIZE)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void NewPwdtxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ' ' || NewPwdtxt.Text.Length >= ConstVar.USER_PWD_SIZE)
+            {
+                e.Handled = true;
+            }
+        }
+    
+        private void RepeatPwdtxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ' ' || RepeatPwdtxt.Text.Length >= ConstVar.USER_PWD_SIZE)
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

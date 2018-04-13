@@ -41,7 +41,6 @@
             this.删除图书ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.书籍查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.书籍查询ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.书籍归还ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.书籍借阅ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改图书ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.修改密码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,7 +87,7 @@
             this.添加职工ToolStripMenuItem1,
             this.删除图书ToolStripMenuItem});
             this.添加职工ToolStripMenuItem.Name = "添加职工ToolStripMenuItem";
-            this.添加职工ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.添加职工ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.添加职工ToolStripMenuItem.Text = "用户管理";
             this.添加职工ToolStripMenuItem.Click += new System.EventHandler(this.添加职工ToolStripMenuItem_Click);
             // 
@@ -109,8 +108,9 @@
             // 记录查询ToolStripMenuItem
             // 
             this.记录查询ToolStripMenuItem.Name = "记录查询ToolStripMenuItem";
-            this.记录查询ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.记录查询ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.记录查询ToolStripMenuItem.Text = "记录查询";
+            this.记录查询ToolStripMenuItem.Click += new System.EventHandler(this.记录查询ToolStripMenuItem_Click);
             // 
             // 职工操作ToolStripMenuItem
             // 
@@ -152,8 +152,7 @@
             // 书籍查询ToolStripMenuItem
             // 
             this.书籍查询ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.书籍查询ToolStripMenuItem1,
-            this.书籍归还ToolStripMenuItem1});
+            this.书籍查询ToolStripMenuItem1});
             this.书籍查询ToolStripMenuItem.Name = "书籍查询ToolStripMenuItem";
             this.书籍查询ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.书籍查询ToolStripMenuItem.Text = "馆藏书籍";
@@ -164,13 +163,6 @@
             this.书籍查询ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
             this.书籍查询ToolStripMenuItem1.Text = "书籍检索";
             this.书籍查询ToolStripMenuItem1.Click += new System.EventHandler(this.书籍查询ToolStripMenuItem1_Click);
-            // 
-            // 书籍归还ToolStripMenuItem1
-            // 
-            this.书籍归还ToolStripMenuItem1.Name = "书籍归还ToolStripMenuItem1";
-            this.书籍归还ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
-            this.书籍归还ToolStripMenuItem1.Text = "书籍归还";
-            this.书籍归还ToolStripMenuItem1.Click += new System.EventHandler(this.书籍归还ToolStripMenuItem1_Click);
             // 
             // 书籍借阅ToolStripMenuItem
             // 
@@ -299,7 +291,6 @@
         private System.Windows.Forms.ToolStripMenuItem 添加职工ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 书籍查询ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 书籍查询ToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem 书籍归还ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 书籍借阅ToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel DateTimeStatus;

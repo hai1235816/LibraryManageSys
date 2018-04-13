@@ -66,7 +66,7 @@ namespace Lib_Mana_Sys
                     {
                         utemp.Valid = true;
                         FileDate.AlterInfo(utemp);
-                        FileDate.MatchRecord(OptType.冻结, utemp.ID);
+                        FileDate.MatchRecord(OptType.冻结,"123456" ,utemp.ID);
                         MessageBox.Show("账户解冻成功.", "通知");
                     }
                 }
@@ -89,7 +89,7 @@ namespace Lib_Mana_Sys
             char c = e.KeyChar;
             if (c != '\b')
             {
-                if (c < '0' || c > '9' || IDtxt.Text.Length >= 12)
+                if (c < '0' || c > '9' || IDtxt.Text.Length >= ConstVar.USER_ID_SIZE)
                 {
                     e.Handled = true;
                 }

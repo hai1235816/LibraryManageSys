@@ -32,6 +32,7 @@ namespace Lib_Mana_Sys
         private FillInfo fillInfo;
         private Freeze freeze;
         private Unfreeze unfreeze;
+        private RecordSearch recordSearch;
         public Main()
         {
             InitializeComponent();
@@ -66,12 +67,7 @@ namespace Lib_Mana_Sys
         private void Main_Load(object sender, EventArgs e)
         {
             login.ShowDialog();
-            if (user.Pri != Privilege.游客)
-            {
-                user.Syncr();
-            }
         }
-        //每次程序启动，都会把过时的预约记录清除（有效位作废）
         
         public void updateStatus()
         {
@@ -81,16 +77,10 @@ namespace Lib_Mana_Sys
 
         private void 帮助ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
+            uint size = FileDate.CountOf<Record>();
+            for (int i = 0; i < size ; i++)
             {
-                for(int i=0; ; i++)
-                {
-                    FileDate.ReadOne<Record>(i).debug();
-                }
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-
+                FileDate.ReadOne<Record>(i).debug();
             }
         }
 
@@ -210,6 +200,16 @@ namespace Lib_Mana_Sys
                 MessageBox.Show("游客止步", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+        }
+
+        private void 记录查询ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(recordSearch==null || recordSearch.IsDisposed)
+            {
+                recordSearch = new RecordSearch();
+                recordSearch.MdiParent = this;
+            }
+            recordSearch.Show();
         }
     }
 }

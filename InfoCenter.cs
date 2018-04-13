@@ -17,7 +17,7 @@ namespace Lib_Mana_Sys
         {
             Statelb.Text = Main.user.Valid ? "正常" : "被冻结";
             bor_numlb.Text = Main.user.BorrowBook.Count.ToString();
-            Balancelb.Text = Main.user.Balance.ToString();
+            balancelb.Text = Main.user.Balance.ToString();
             table.Clear();
             foreach (uint bkid in Main.user.BorrowBook)
             {

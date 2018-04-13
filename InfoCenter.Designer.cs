@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.Balancelb = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.Statelb = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,6 +39,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label5 = new System.Windows.Forms.Label();
+            this.balancelb = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,15 +52,6 @@
             this.label1.Size = new System.Drawing.Size(90, 21);
             this.label1.TabIndex = 0;
             this.label1.Text = "账号状态：";
-            // 
-            // Balancelb
-            // 
-            this.Balancelb.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Balancelb.Location = new System.Drawing.Point(124, 126);
-            this.Balancelb.Name = "Balancelb";
-            this.Balancelb.ReadOnly = true;
-            this.Balancelb.Size = new System.Drawing.Size(58, 29);
-            this.Balancelb.TabIndex = 1;
             // 
             // label2
             // 
@@ -168,12 +159,23 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "双击可归还图书";
             // 
+            // balancelb
+            // 
+            this.balancelb.AutoSize = true;
+            this.balancelb.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.balancelb.Location = new System.Drawing.Point(108, 127);
+            this.balancelb.Name = "balancelb";
+            this.balancelb.Size = new System.Drawing.Size(74, 21);
+            this.balancelb.TabIndex = 12;
+            this.balancelb.Text = "等待查询";
+            // 
             // InfoCenter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.ClientSize = new System.Drawing.Size(679, 296);
+            this.Controls.Add(this.balancelb);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button1);
@@ -184,7 +186,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.Statelb);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.Balancelb);
             this.Controls.Add(this.label1);
             this.Name = "InfoCenter";
             this.Text = "个人中心";
@@ -198,7 +199,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox Balancelb;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label Statelb;
         private System.Windows.Forms.Label label3;
@@ -209,5 +209,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label balancelb;
     }
 }

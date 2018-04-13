@@ -11,26 +11,23 @@ namespace Lib_Mana_Sys
 {
     static class FileDate
     {
-
         public static List<BookMaster> SearchByISBN(string isbn)
         {
             BookMaster master = new BookMaster();
+            uint count = FileDate.CountOf<BookMaster>();
             List<BookMaster> bklist = new List<BookMaster>(1);
-            try
+            for (int i = 0; i < count; i++)
             {
-                for (int i = 0; ; i++)
+                master = FileDate.ReadOne<BookMaster>(i);
+                if (master.Info.ISBN.Contains(isbn))
                 {
-                    master = FileDate.ReadOne<BookMaster>(i);
-                    if (master.Info.ISBN.Contains(isbn))
-                    {
-                        bklist.Add(master);
-                        break;
-                    }
+                    bklist.Add(master);
+                    break;
                 }
             }
-            catch (ArgumentException)
+            if (bklist.Count == 0)
             {
-                MessageBox.Show("未找到该ISBN编号的书", "提示");
+                MessageBox.Show("未找到该ISBN编号的书", "提示",MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
             return bklist;
         }
@@ -67,7 +64,7 @@ namespace Lib_Mana_Sys
             return Convert.ToUInt32(len);
         }
         //与以前的记录匹配，成为历史记录
-        public static void MatchRecord(OptType tp, string opt)
+        public static void MatchRecord(OptType tp, string opt, string obj)
         {
             if (!File.Exists("Lib_Mana_Sys.User.dat")) return;
             int len = 0;
@@ -76,10 +73,10 @@ namespace Lib_Mana_Sys
                 len = (int)fs.Length / Marshal.SizeOf(typeof(Record));
             }
             Record rec = new Record();
-            for (int i = 1; len > 0 ; i++)
+            for (int i = 1; i <= len ; i++)
             {
                 rec = FileDate.ReadOne<Record>(len - i);
-                if (rec.Optor == opt && rec.Type == tp && rec.Unmatch)
+                if (rec.Unmatch && rec.Type == tp && rec.Optor == opt && rec.Objer == obj)
                 {
                     FileDate.AlterInfo(rec.findMatch());
                     break;
@@ -138,6 +135,30 @@ namespace Lib_Mana_Sys
                             {
                                 fs.Position -= structsize;
                                 bw.Write(Struct2Byte<T>(t));
+                            }
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        //删除对象（相当于将对象变为默认值）
+        public static void Delete<T>(T t)where T:IGet,new()
+        {
+            int structsize = Marshal.SizeOf(typeof(T));
+            uint count = FileDate.CountOf<T>();
+            using (FileStream fs = new FileStream(t.ToString() + ".dat", FileMode.Open))
+            {
+                using (BinaryReader br = new BinaryReader(fs))
+                {
+                    for (uint i = 0; i < count; i++)
+                    {
+                        if (Byte2Struct<T>(br.ReadBytes(structsize)).GetID() == t.GetID())
+                        {
+                            using (BinaryWriter bw = new BinaryWriter(fs))
+                            {
+                                fs.Position -= structsize;
+                                bw.Write(Struct2Byte<T>(new T()));
                             }
                             return;
                         }
@@ -208,4 +229,6 @@ public class ConstVar
     //public const int MAX_BOOKVIEW_NUM = 30;
     public const float FINE_IF_UNFINISHED = 2.0f;
     public const float FINE_IFNOT_RETURN_EVERYDAY = 1.5f;
+    public const int MAX_RECORD_SEARCH_DAY = 180;
+    public const int RESERVE_DAYS_FOR_BOOK = 3;
 }

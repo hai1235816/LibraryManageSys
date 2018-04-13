@@ -33,7 +33,7 @@ namespace Lib_Mana_Sys
             }
             else if (!(Stu.Checked || Worker.Checked || Admin.Checked))
             {
-                MessageBox.Show("请选择你的登录身份！");
+                MessageBox.Show("请选择你的登录身份！","提示",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 return;
             }
             else
@@ -63,7 +63,7 @@ namespace Lib_Mana_Sys
             }
             else
             {
-                MessageBox.Show("未找到用户信息，用户名或密码或者登录身份错误.");
+                MessageBox.Show("未找到用户信息，用户名或密码或者登录身份错误.", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -88,15 +88,30 @@ namespace Lib_Mana_Sys
 
         private void Login_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //判断用户预约的书有没有被归还，提醒用户借阅
-            if (Main.user.Reserveid > 0)
+            if (Main.user.Pri != Privilege.游客)
             {
-                //需要判断下这个预约是否还有效！
-                BookMaster master = FileDate.FindObjByID<BookMaster>(Main.user.Reserveid.ToString());
-                if (master.Access_num + master.Reserved_num > 0)
+                //每次程序启动，都会把过时的预约记录清除（有效位作废）
+                Main.user.Syncr();
+            }
+        }
+
+        private void IDtxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char c = e.KeyChar;
+            if (c != '\b')
+            {
+                if (c < '0' || c > '9' || IDtxt.Text.Length >= ConstVar.USER_ID_SIZE)
                 {
-                    MessageBox.Show("你预约的书已经归还啦！快点去借阅吧", "温馨提示");
+                    e.Handled = true;
                 }
+            }
+        }
+
+        private void PWDtxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == ' ' || PWDtxt.Text.Length >= ConstVar.USER_PWD_SIZE)
+            {
+                e.Handled = true;
             }
         }
     }

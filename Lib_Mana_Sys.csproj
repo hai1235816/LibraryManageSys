@@ -109,6 +109,12 @@
     <Compile Include="登录界面.Designer.cs">
       <DependentUpon>登录界面.cs</DependentUpon>
     </Compile>
+    <Compile Include="记录查询.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="记录查询.Designer.cs">
+      <DependentUpon>记录查询.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Charge.resx">
       <DependentUpon>Charge.cs</DependentUpon>
     </EmbeddedResource>
@@ -147,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="登录界面.resx">
       <DependentUpon>登录界面.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="记录查询.resx">
+      <DependentUpon>记录查询.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

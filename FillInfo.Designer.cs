@@ -91,6 +91,7 @@
             this.Passwordtxt.PasswordChar = '*';
             this.Passwordtxt.Size = new System.Drawing.Size(163, 23);
             this.Passwordtxt.TabIndex = 3;
+            this.Passwordtxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Passwordtxt_KeyPress);
             // 
             // button1
             // 
@@ -131,6 +132,7 @@
             this.checkPwdtxt.PasswordChar = '*';
             this.checkPwdtxt.Size = new System.Drawing.Size(163, 23);
             this.checkPwdtxt.TabIndex = 4;
+            this.checkPwdtxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkPwdtxt_KeyPress);
             // 
             // nametxt
             // 
@@ -139,6 +141,8 @@
             this.nametxt.Name = "nametxt";
             this.nametxt.Size = new System.Drawing.Size(163, 23);
             this.nametxt.TabIndex = 2;
+            this.nametxt.TextChanged += new System.EventHandler(this.nametxt_TextChanged);
+            this.nametxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nametxt_KeyPress);
             // 
             // stu
             // 

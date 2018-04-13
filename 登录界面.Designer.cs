@@ -69,6 +69,7 @@
             this.IDtxt.TabIndex = 2;
             this.IDtxt.Text = "16020031111";
             this.IDtxt.TextChanged += new System.EventHandler(this.IDtxt_TextChanged);
+            this.IDtxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.IDtxt_KeyPress);
             // 
             // PWDtxt
             // 
@@ -79,6 +80,7 @@
             this.PWDtxt.Size = new System.Drawing.Size(157, 26);
             this.PWDtxt.TabIndex = 3;
             this.PWDtxt.Text = "123456";
+            this.PWDtxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.PWDtxt_KeyPress);
             // 
             // Admin
             // 
@@ -142,7 +144,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(286, 351);
+            this.ClientSize = new System.Drawing.Size(291, 331);
             this.Controls.Add(this.confirm);
             this.Controls.Add(this.Vis);
             this.Controls.Add(this.Stu);

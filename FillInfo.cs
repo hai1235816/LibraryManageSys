@@ -59,7 +59,7 @@ namespace Lib_Mana_Sys
             char c = e.KeyChar;
             if (c != '\b')
             {
-                if (c < '0' || c > '9' || AccountIDtxt.Text.Length >= 12)
+                if (c < '0' || c > '9' || AccountIDtxt.Text.Length >= ConstVar.USER_ID_SIZE)
                 {
                     e.Handled = true;
                 }
@@ -69,6 +69,35 @@ namespace Lib_Mana_Sys
         private void gender_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void nametxt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nametxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ' ' || nametxt.Text.Length >= ConstVar.USER_NAME_SIZE)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void Passwordtxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ' ' || Passwordtxt.Text.Length >= ConstVar.USER_PWD_SIZE)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void checkPwdtxt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ' ' || checkPwdtxt.Text.Length >= ConstVar.USER_PWD_SIZE)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

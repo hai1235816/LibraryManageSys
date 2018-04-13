@@ -13,24 +13,19 @@ namespace Lib_Mana_Sys
     public partial class SearchBooks : Form
     {
         DataTable table;
+        string key;
         private List<BookMaster> SearchByKeyword(Book book)
         {
             List<BookMaster> bklist = new List<BookMaster>();
             BookMaster master = new BookMaster();
-            try
+            uint size = FileDate.CountOf<BookMaster>();
+            for (int i = 0; i < size; i++)
             {
-                for (int i = 0; ; i++)
+                master = FileDate.ReadOne<BookMaster>(i);
+                if (master.SimiliarTo(book))
                 {
-                    master = FileDate.ReadOne<BookMaster>(i);
-                    if (master.SimiliarTo(book))
-                    {
-                        bklist.Add(master);
-                    }
+                    bklist.Add(master);
                 }
-            }
-            catch (ArgumentException)
-            {
-
             }
             return bklist;
         }
@@ -46,27 +41,35 @@ namespace Lib_Mana_Sys
             dataGridView1.DataSource = table;
         }
 
-        public void Add(Book book)
+        private void Add(Book book)
         {
             table.Rows.Add(book.Name, book.Author, book.ISBN, book.Press, book.Type);
         }
 
-        private void search_Click(object sender, EventArgs e)
+        private bool Check()
         {
-            string key = keywordtxt.Text;
-            if (key == "") return;
-            if (key.Length < 4 && isbn_rbtn.Checked)
+            key = keywordtxt.Text.Trim();
+            if (key == "")
+            {
+                return false;
+            }else if (key.Length < 4 && isbn_rbtn.Checked)
             {
                 MessageBox.Show("ISBN检索至少要输入4位", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                return false;
             }
+            return true;
+        }
+
+        private void search_Click(object sender, EventArgs e)
+        {
+            if (!Check()) return;
             table.Clear();
             Book book = new Book();
             book.Name = bkname_rbtn.Checked ? key : "";
             book.Author = auth_rbtn.Checked ? key : "";
             book.ISBN = isbn_rbtn.Checked ? key : "";
             book.Press = press_rbtn.Checked ? key : "";
-            List<BookMaster> bklist = SearchByKeyword(book);
+            List<BookMaster> bklist = new List<BookMaster>(SearchByKeyword(book));
             int i = bkTypebox.SelectedIndex;
             bool define_type = i > 0;
             BookType bookType = i > 1 ? (BookType)(i - 1) : 0;

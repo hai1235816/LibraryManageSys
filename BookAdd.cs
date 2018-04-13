@@ -19,32 +19,12 @@ namespace Lib_Mana_Sys
         {
             if (bkTypebox.SelectedIndex < 0)
             {
-                MessageBox.Show("需要选择图书种类", "提示");
-                return false;
-            }
-            else if (bknametxt.Text.Length > ConstVar.BOOK_NAME_SIZE)
-            {
-                MessageBox.Show("书名长度不符合要求！", "提示");
-                return false;
-            }
-            else if (presstxt.Text.Length > ConstVar.BOOK_PRESS_SIZE)
-            {
-                MessageBox.Show("出版社长度不符合要求！", "提示");
-                return false;
-            }
-            else if (isbntxt.Text.Length > ConstVar.ISBN_SIZE)
-            {
-                MessageBox.Show("ISBN长度不符合要求！", "提示");
-                return false;
-            }
-            else if (authortxt.Text.Length > ConstVar.BOOK_AUTHOR_SIZE)
-            {
-                MessageBox.Show("作者名称长度不符合要求！", "提示");
+                MessageBox.Show("需要选择图书种类", "提示",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 return false;
             }
             else if (Convert.ToUInt32(NUMtxt.Text) > 20)
             {
-                MessageBox.Show("一次最多录入20本书籍", "提示");
+                MessageBox.Show("一次最多录入20本书籍", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
             return true;
@@ -75,7 +55,7 @@ namespace Lib_Mana_Sys
                 BookMaster master = new BookMaster(sum, book);
                 if (FileDate.Exist<BookMaster>(master))
                 {
-                    DialogResult dr = MessageBox.Show("此书已经存在，要直接添加吗？", "重要提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    DialogResult dr = MessageBox.Show("此书已经存在，要直接添加吗（将会增加总数量）？", "重要提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (dr == DialogResult.Yes)
                     {
                         master.Total_num += sum;
@@ -86,8 +66,11 @@ namespace Lib_Mana_Sys
                         return;
                     }
                 }
-                FileDate.WriteInfo(book);
-                MessageBox.Show("书籍添加成功！", "通知");
+                else
+                {
+                    FileDate.WriteInfo(master);
+                    MessageBox.Show("书籍添加成功！", "通知");
+                }
             }
         }
 
@@ -96,7 +79,7 @@ namespace Lib_Mana_Sys
             char c = e.KeyChar;
             if (c != '\b')
             {
-                if (c < '0' || c > '9')
+                if (c < '0' || c > '9' || isbntxt.Text.Length >= ConstVar.ISBN_SIZE)
                 {
                     e.Handled = true;
                 }
@@ -115,16 +98,31 @@ namespace Lib_Mana_Sys
         private void bknametxt_KeyPress(object sender, KeyPressEventArgs e)
         {
             //判断书名输入是否规范
+            char c = e.KeyChar;
+            if (c != '\b' && bknametxt.Text.Length >= ConstVar.BOOK_NAME_SIZE)
+            {
+                e.Handled = true;
+            }
         }
 
         private void authortxt_KeyPress(object sender, KeyPressEventArgs e)
         {
             //判断作者名输入是否规范
+            char c = e.KeyChar;
+            if (c != '\b' && bknametxt.Text.Length >= ConstVar.BOOK_AUTHOR_SIZE)
+            {
+                e.Handled = true;
+            }
         }
 
         private void presstxt_KeyPress(object sender, KeyPressEventArgs e)
         {
             //判断出版社名输入是否规范
+            char c = e.KeyChar;
+            if (c != '\b' && bknametxt.Text.Length >= ConstVar.BOOK_PRESS_SIZE)
+            {
+                e.Handled = true;
+            }
         }
 
         private void bkTypebox_KeyPress(object sender, KeyPressEventArgs e)

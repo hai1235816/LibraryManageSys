@@ -88,6 +88,7 @@
             this.AccountIDtxt.Name = "AccountIDtxt";
             this.AccountIDtxt.Size = new System.Drawing.Size(164, 26);
             this.AccountIDtxt.TabIndex = 4;
+            this.AccountIDtxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AccountIDtxt_KeyPress);
             // 
             // OriPwdtxt
             // 
@@ -97,6 +98,7 @@
             this.OriPwdtxt.PasswordChar = '*';
             this.OriPwdtxt.Size = new System.Drawing.Size(164, 26);
             this.OriPwdtxt.TabIndex = 5;
+            this.OriPwdtxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OriPwdtxt_KeyPress);
             // 
             // NewPwdtxt
             // 
@@ -106,6 +108,7 @@
             this.NewPwdtxt.PasswordChar = '*';
             this.NewPwdtxt.Size = new System.Drawing.Size(164, 26);
             this.NewPwdtxt.TabIndex = 6;
+            this.NewPwdtxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NewPwdtxt_KeyPress);
             // 
             // RepeatPwdtxt
             // 
@@ -115,6 +118,7 @@
             this.RepeatPwdtxt.PasswordChar = '*';
             this.RepeatPwdtxt.Size = new System.Drawing.Size(164, 26);
             this.RepeatPwdtxt.TabIndex = 7;
+            this.RepeatPwdtxt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RepeatPwdtxt_KeyPress);
             // 
             // Confirmbtn
             // 
