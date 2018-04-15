@@ -46,6 +46,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(12, 24);
@@ -56,6 +57,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(12, 98);
@@ -66,6 +68,7 @@
             // 
             // tipslb
             // 
+            this.tipslb.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tipslb.AutoSize = true;
             this.tipslb.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tipslb.Location = new System.Drawing.Point(13, 184);
@@ -76,6 +79,7 @@
             // 
             // AccountIDtxt
             // 
+            this.AccountIDtxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.AccountIDtxt.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.AccountIDtxt.Location = new System.Drawing.Point(102, 28);
             this.AccountIDtxt.Name = "AccountIDtxt";
@@ -85,6 +89,7 @@
             // 
             // Passwordtxt
             // 
+            this.Passwordtxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Passwordtxt.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Passwordtxt.Location = new System.Drawing.Point(102, 102);
             this.Passwordtxt.Name = "Passwordtxt";
@@ -95,6 +100,7 @@
             // 
             // button1
             // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.Location = new System.Drawing.Point(51, 281);
             this.button1.Name = "button1";
@@ -106,6 +112,7 @@
             // 
             // label4
             // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.Location = new System.Drawing.Point(12, 63);
@@ -116,6 +123,7 @@
             // 
             // label5
             // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label5.Location = new System.Drawing.Point(12, 139);
@@ -126,6 +134,7 @@
             // 
             // checkPwdtxt
             // 
+            this.checkPwdtxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.checkPwdtxt.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.checkPwdtxt.Location = new System.Drawing.Point(102, 143);
             this.checkPwdtxt.Name = "checkPwdtxt";
@@ -136,6 +145,7 @@
             // 
             // nametxt
             // 
+            this.nametxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.nametxt.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.nametxt.Location = new System.Drawing.Point(102, 67);
             this.nametxt.Name = "nametxt";
@@ -146,6 +156,7 @@
             // 
             // stu
             // 
+            this.stu.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.stu.AutoSize = true;
             this.stu.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.stu.Location = new System.Drawing.Point(17, 225);
@@ -159,6 +170,7 @@
             // 
             // worker
             // 
+            this.worker.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.worker.AutoSize = true;
             this.worker.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.worker.Location = new System.Drawing.Point(142, 225);
@@ -171,6 +183,7 @@
             // 
             // quit退出
             // 
+            this.quit退出.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.quit退出.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.quit退出.Location = new System.Drawing.Point(142, 282);
             this.quit退出.Name = "quit退出";
@@ -182,6 +195,7 @@
             // 
             // gender
             // 
+            this.gender.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.gender.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.gender.FormattingEnabled = true;
             this.gender.Items.AddRange(new object[] {

@@ -48,14 +48,14 @@ namespace Lib_Mana_Sys
             {
                 if (rec.Unmatch)
                 {
-                    state = "预约未开始";
+                    state = rec.Dur > -1 ? "预约已生效" : "预约未开始";
                 }
                 else
                 {
                     state = rec.Dur > -1 ? "预约成功" : "预约人未完成预约";
                 }
             }
-            table.Rows.Add(rec.Type, rec.Optor, rec.Dur, state);
+            table.Rows.Add(rec.Type, rec.Optor, rec.datetime, state, rec.Dur == -1 ? "..." : rec.Dur.ToString());
         }
 
         public RecordSearch()
@@ -64,9 +64,9 @@ namespace Lib_Mana_Sys
             table = new DataTable("Table_Record");
             table.Columns.Add("记录类型");
             table.Columns.Add("操作对象");
-            table.Columns.Add("持续天数");
-            table.Columns.Add("记录状态");
             table.Columns.Add("初始时间");
+            table.Columns.Add("记录状态");
+            table.Columns.Add("持续天数");
             dataGridView1.DataSource = table;
         }
 

@@ -48,25 +48,29 @@ namespace Lib_Mana_Sys
             //若借书的时候已经无书可借，说明用户是来取预约的书的，否则是来正常借书的
             if (Access_num > 0) lent_num++;
             else reserved_num--;
+            FileDate.AlterInfo<BookMaster>(this);
         }
         public void beBooked()
         {
             reserved_num++;
+            FileDate.AlterInfo<BookMaster>(this);
         }
         public void beReturned()
         {
             lent_num--;
+            FileDate.AlterInfo<BookMaster>(this);
             //预约的记录开始生效
             if (Reserved_num > 0)
             {
                 Record rec = new Record();
                 long len = FileDate.CountOf<Record>();
-                for (int i = 0; i<len ; i++)
+                for (int i = 1; i <= len ; i++)
                 {
                     rec = FileDate.ReadOne<Record>((int)len - i);
-                    if (rec.Unmatch && rec.Optor == GetID())
+                    if (rec.Unmatch && rec.Objer == GetID())
                     {
-                        rec.Unmatch = false;
+                        rec.Dur = 3;
+                        FileDate.AlterInfo<Record>(rec);
                     }
                     //只查找最近一个月内的记录
                     if (rec.spanDaysToPresent() > 31) break;
@@ -191,6 +195,22 @@ namespace Lib_Mana_Sys
             reserveid = 0;
             balance = 0.0f;
         }
+        public User(User u)
+        {
+            valid = u.Valid;
+            gender = u.Gender;
+            pri = u.Pri;
+            id = u.ID;
+            name = u.Name;
+            pwd = u.Pwd;
+            borrowBook = new uint[ConstVar.USER_BOOKBORROW_SIZE];
+            for(int i = 0; i < ConstVar.USER_BOOKBORROW_SIZE; i++)
+            {
+                borrowBook[i] = u[i];
+            }
+            reserveid = u.Reserveid;
+            balance = u.Balance;
+        }
         public bool Valid { get { return valid; } set { valid = value; } }
         public bool Gender { get { return gender; } }
         public Privilege Pri { get { return pri; } }
@@ -284,7 +304,7 @@ namespace Lib_Mana_Sys
                     reserveid = master.Master_ID;
                     master.beBooked();
                     //产生预约记录
-                    FileDate.WriteInfo<Record>(new Record(OptType.预约, ID, master.GetID(), 0));
+                    FileDate.WriteInfo<Record>(new Record(OptType.预约, ID, master.GetID(), -1));
                     MessageBox.Show("你的书成功被预约，记得早点来取", "预约成功");
                     return;
                 }
@@ -316,11 +336,13 @@ namespace Lib_Mana_Sys
             if (!File.Exists("Lib_Mana_Sys.Record.dat")) return;
             Record rec;
             int c = BorrowBook.Count;
-            for (uint len = FileDate.CountOf<Record>(); c > 0 && len > 0; len--)
+            uint len = FileDate.CountOf<Record>();
+            for (int i = 1 ; c > 0 && i < len; i++)
             {
-                rec = FileDate.ReadOne<Record>((int)len - 1);
+                rec = FileDate.ReadOne<Record>((int)len - i);
                 if (rec.Optor == ID)
                 {
+                    //判断用户借书有没有逾期
                     if(rec.Unmatch && rec.Type == OptType.借阅)
                     {
                         //这个分支是判断用户借书有没有超出时间限制
@@ -333,6 +355,7 @@ namespace Lib_Mana_Sys
                         c--;
                         changed = true;
                     }
+                    //判断用户预约是否还有效
                     else if(rec.Type == OptType.预约 && rec.spanDaysToPresent() > ConstVar.RESERVE_DAYS_FOR_BOOK && rec.Dur > -1)
                     {
                         if (rec.Unmatch)
@@ -355,12 +378,21 @@ namespace Lib_Mana_Sys
                         FileDate.AlterInfo<Record>(rec);
                         changed = true;
                     }
+                    //判断用户冻结是否到期
+                    if (!Valid && rec.Type == OptType.冻结 && rec.Unmatch && rec.Optor == ID)
+                    {
+                        if (rec.spanDaysToPresent() >= rec.Dur)
+                        {
+                            rec.Unmatch = false;
+                            Valid = true;
+                            changed = true;
+                        }
+                    }
                 }
             }
-            //判断用户预约的书有没有被归还，提醒用户借阅
             if (Reserveid > 0)
             {
-                //需要判断下这个预约是否还有效!
+                //判断用户预约的书有没有被归还，提醒用户借阅
                 BookMaster master = FileDate.FindObjByID<BookMaster>(Reserveid.ToString());
                 if (master.Access_num + master.Reserved_num > 0)
                 {
@@ -404,6 +436,14 @@ namespace Lib_Mana_Sys
         public string Optor { get => optor; set => optor = value; }
         public string Objer { get => objer; set => objer = value; }
         public bool Unmatch { get => unmatch; set => unmatch = value; }
+        public DateTime datetime
+        {
+            get
+            {
+                return DateTime.FromBinary(date);
+            }
+        }
+
         //记录完成，成为历史记录
         public Record findMatch()
         {
@@ -417,8 +457,7 @@ namespace Lib_Mana_Sys
         //记录距离现在的时间
         public int spanDaysToPresent()
         {
-            DateTime here = DateTime.FromBinary(date);
-            return (DateTime.Now - here).Days;
+            return (DateTime.Now - datetime).Days;
         }
         public void debug()
         {
@@ -448,7 +487,7 @@ namespace Lib_Mana_Sys
             }
             if (info != "")
             {
-                info += "\t" + DateTime.FromBinary(date).ToString();
+                info += "\t" + datetime.ToString();
                 MessageBox.Show(info);
             }
             else
@@ -459,7 +498,7 @@ namespace Lib_Mana_Sys
         public string GetID()
         {
             //记录的时间就是它的ID
-            return DateTime.FromBinary(date).ToString() + optor;
+            return datetime.ToString() + optor;
         }
         public string GetName()
         {

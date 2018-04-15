@@ -45,6 +45,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(12, 25);
@@ -55,6 +56,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(12, 126);
@@ -65,6 +67,7 @@
             // 
             // Statelb
             // 
+            this.Statelb.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Statelb.AutoSize = true;
             this.Statelb.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Statelb.Location = new System.Drawing.Point(120, 25);
@@ -75,6 +78,7 @@
             // 
             // label3
             // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.Location = new System.Drawing.Point(12, 70);
@@ -93,6 +97,7 @@
             // 
             // chargebtn
             // 
+            this.chargebtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.chargebtn.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.chargebtn.Location = new System.Drawing.Point(124, 238);
             this.chargebtn.Name = "chargebtn";
@@ -104,6 +109,7 @@
             // 
             // bor_numlb
             // 
+            this.bor_numlb.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.bor_numlb.AutoSize = true;
             this.bor_numlb.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.bor_numlb.Location = new System.Drawing.Point(120, 70);
@@ -114,6 +120,7 @@
             // 
             // quit退出
             // 
+            this.quit退出.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.quit退出.BackColor = System.Drawing.SystemColors.HighlightText;
             this.quit退出.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.quit退出.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -127,6 +134,7 @@
             // 
             // button1
             // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.button1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button1.Location = new System.Drawing.Point(565, 241);
             this.button1.Name = "button1";
@@ -138,6 +146,8 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveCaption;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(213, 12);
@@ -151,6 +161,7 @@
             // 
             // label5
             // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label5.Location = new System.Drawing.Point(323, 238);
@@ -161,6 +172,7 @@
             // 
             // balancelb
             // 
+            this.balancelb.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.balancelb.AutoSize = true;
             this.balancelb.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.balancelb.Location = new System.Drawing.Point(108, 127);

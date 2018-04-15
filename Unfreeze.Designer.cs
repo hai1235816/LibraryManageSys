@@ -39,6 +39,7 @@
             // 
             // opt
             // 
+            this.opt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.opt.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.opt.Location = new System.Drawing.Point(114, 175);
             this.opt.Name = "opt";
@@ -50,6 +51,7 @@
             // 
             // quit退出
             // 
+            this.quit退出.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.quit退出.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.quit退出.Location = new System.Drawing.Point(62, 238);
             this.quit退出.Name = "quit退出";
@@ -61,6 +63,7 @@
             // 
             // state
             // 
+            this.state.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.state.AutoSize = true;
             this.state.Font = new System.Drawing.Font("楷体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.state.Location = new System.Drawing.Point(111, 119);
@@ -71,6 +74,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(15, 116);
@@ -81,6 +85,7 @@
             // 
             // search
             // 
+            this.search.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.search.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.search.Location = new System.Drawing.Point(19, 175);
             this.search.Name = "search";
@@ -92,6 +97,7 @@
             // 
             // IDtxt
             // 
+            this.IDtxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.IDtxt.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.IDtxt.Location = new System.Drawing.Point(16, 61);
             this.IDtxt.Name = "IDtxt";
@@ -102,6 +108,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(12, 22);

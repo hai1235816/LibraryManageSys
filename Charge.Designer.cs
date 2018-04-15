@@ -83,6 +83,7 @@
             this.Controls.Add(this.amounttxt);
             this.Controls.Add(this.tipslb);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Charge";
             this.Text = "Charge";
             this.Load += new System.EventHandler(this.Charge_Load);

@@ -96,6 +96,7 @@ namespace Lib_Mana_Sys
             {
                 string isbn = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
                 Main.user.borrowFrom(FileDate.SearchByISBN(isbn)[0]);
+                FileDate.AlterInfo<User>(Main.user);
             }
             
         }

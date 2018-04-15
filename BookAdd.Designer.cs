@@ -45,6 +45,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(16, 23);
@@ -55,6 +56,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(16, 72);
@@ -65,6 +67,7 @@
             // 
             // label3
             // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.Location = new System.Drawing.Point(16, 115);
@@ -75,6 +78,7 @@
             // 
             // label4
             // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.Location = new System.Drawing.Point(16, 159);
@@ -85,6 +89,7 @@
             // 
             // bknametxt
             // 
+            this.bknametxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.bknametxt.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.bknametxt.Location = new System.Drawing.Point(107, 27);
             this.bknametxt.Name = "bknametxt";
@@ -95,6 +100,7 @@
             // 
             // isbntxt
             // 
+            this.isbntxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.isbntxt.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.isbntxt.Location = new System.Drawing.Point(107, 163);
             this.isbntxt.Name = "isbntxt";
@@ -104,6 +110,7 @@
             // 
             // label5
             // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label5.Location = new System.Drawing.Point(16, 253);
@@ -114,6 +121,7 @@
             // 
             // confirm
             // 
+            this.confirm.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.confirm.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.confirm.Location = new System.Drawing.Point(245, 291);
             this.confirm.Name = "confirm";
@@ -125,6 +133,7 @@
             // 
             // NUMtxt
             // 
+            this.NUMtxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.NUMtxt.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.NUMtxt.Location = new System.Drawing.Point(107, 250);
             this.NUMtxt.Name = "NUMtxt";
@@ -136,6 +145,7 @@
             // 
             // bkTypebox
             // 
+            this.bkTypebox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.bkTypebox.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.bkTypebox.FormattingEnabled = true;
             this.bkTypebox.Items.AddRange(new object[] {
@@ -169,6 +179,7 @@
             // 
             // label6
             // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label6.Location = new System.Drawing.Point(12, 206);
@@ -179,6 +190,7 @@
             // 
             // authortxt
             // 
+            this.authortxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.authortxt.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.authortxt.Location = new System.Drawing.Point(107, 119);
             this.authortxt.Name = "authortxt";
@@ -188,6 +200,7 @@
             // 
             // presstxt
             // 
+            this.presstxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.presstxt.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.presstxt.Location = new System.Drawing.Point(107, 76);
             this.presstxt.Name = "presstxt";

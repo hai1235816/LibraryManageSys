@@ -74,7 +74,7 @@ namespace Lib_Mana_Sys
 
         private void Login_Load(object sender, EventArgs e)
         {
-
+            qual = false;
         }
 
         private void Login_FormClosing(object sender, FormClosingEventArgs e)

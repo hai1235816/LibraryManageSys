@@ -11,6 +11,7 @@ namespace Lib_Mana_Sys
 {
     static class FileDate
     {
+        //通过ISBN来找到书籍（书籍ISBN是唯一的，可以当做一个标识）
         public static List<BookMaster> SearchByISBN(string isbn)
         {
             BookMaster master = new BookMaster();
@@ -228,7 +229,7 @@ public class ConstVar
         public const int BORROW_DURING_DAYS = 31;
     //public const int MAX_BOOKVIEW_NUM = 30;
     public const float FINE_IF_UNFINISHED = 2.0f;
-    public const float FINE_IFNOT_RETURN_EVERYDAY = 1.5f;
+    public const float FINE_IFNOT_RETURN_EVERYDAY = 5.0f;
     public const int MAX_RECORD_SEARCH_DAY = 180;
     public const int RESERVE_DAYS_FOR_BOOK = 3;
 }

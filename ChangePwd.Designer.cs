@@ -43,6 +43,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(35, 29);
@@ -53,6 +54,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(19, 76);
@@ -63,6 +65,7 @@
             // 
             // label3
             // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label3.Location = new System.Drawing.Point(19, 119);
@@ -73,6 +76,7 @@
             // 
             // label4
             // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.Location = new System.Drawing.Point(3, 163);
@@ -83,6 +87,7 @@
             // 
             // AccountIDtxt
             // 
+            this.AccountIDtxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.AccountIDtxt.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.AccountIDtxt.Location = new System.Drawing.Point(113, 30);
             this.AccountIDtxt.Name = "AccountIDtxt";
@@ -92,6 +97,7 @@
             // 
             // OriPwdtxt
             // 
+            this.OriPwdtxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.OriPwdtxt.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.OriPwdtxt.Location = new System.Drawing.Point(113, 76);
             this.OriPwdtxt.Name = "OriPwdtxt";
@@ -102,6 +108,7 @@
             // 
             // NewPwdtxt
             // 
+            this.NewPwdtxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.NewPwdtxt.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.NewPwdtxt.Location = new System.Drawing.Point(113, 120);
             this.NewPwdtxt.Name = "NewPwdtxt";
@@ -112,6 +119,7 @@
             // 
             // RepeatPwdtxt
             // 
+            this.RepeatPwdtxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.RepeatPwdtxt.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.RepeatPwdtxt.Location = new System.Drawing.Point(113, 163);
             this.RepeatPwdtxt.Name = "RepeatPwdtxt";
@@ -122,6 +130,7 @@
             // 
             // Confirmbtn
             // 
+            this.Confirmbtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Confirmbtn.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Confirmbtn.Location = new System.Drawing.Point(39, 255);
             this.Confirmbtn.Name = "Confirmbtn";
@@ -133,6 +142,7 @@
             // 
             // Cancelbtn
             // 
+            this.Cancelbtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Cancelbtn.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Cancelbtn.Location = new System.Drawing.Point(168, 255);
             this.Cancelbtn.Name = "Cancelbtn";
@@ -144,6 +154,7 @@
             // 
             // Tipslb
             // 
+            this.Tipslb.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Tipslb.AutoSize = true;
             this.Tipslb.Font = new System.Drawing.Font("楷体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Tipslb.Location = new System.Drawing.Point(36, 216);

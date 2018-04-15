@@ -33,6 +33,7 @@ namespace Lib_Mana_Sys
         private Freeze freeze;
         private Unfreeze unfreeze;
         private RecordSearch recordSearch;
+        private BookAlter bookAlter;
         public Main()
         {
             InitializeComponent();
@@ -52,10 +53,17 @@ namespace Lib_Mana_Sys
             User u2 = new User(false, Privilege.职工, "16020031231", "玉良红", "987452");
             User u3 = new User(true, Privilege.学生, "16020031561", "梁园", "654123");
             User u4 = new User(true, Privilege.管理员, "123456", "Master", "123456");
-            Book b1 = new Book("Java从入门到放弃", "6456516316416", "人民教育出版社", "Master", BookType.数理科学与化学);
+            Book b1 = new Book("Java从入门到放弃", "123456", "人民教育出版社", "Master", BookType.数理科学与化学);
             BookMaster master = new BookMaster(10, b1);
             FileDate.WriteInfo(master);
             Book b2 = new Book("C Plus从入门到入土", "1156416454652", "仁爱教育出版社", "Oh Yes", BookType.哲学宗教);
+            for(uint i = 100; i < 200; i++)
+            {
+                string ment = i.ToString();
+                Book b = new Book("英雄联盟" + ment, ment, "大魔王出版社", "Faker" + ment, BookType.综合性图书);
+                BookMaster m = new BookMaster(2, b);
+                FileDate.WriteInfo(m);
+            }
             master = new BookMaster(6, b2);
             FileDate.WriteInfo(master);
             FileDate.WriteInfo(u2);
@@ -92,6 +100,10 @@ namespace Lib_Mana_Sys
                 if (login.IsDisposed || login == null )
                 {
                     login = new Login(this);
+                }
+                foreach(Form form in this.MdiChildren)
+                {
+                    if (form.Visible) form.Close();
                 }
                 login.ShowDialog();
             }
@@ -167,7 +179,7 @@ namespace Lib_Mana_Sys
             if(searchBooks==null || searchBooks.IsDisposed)
             {
                 searchBooks = new SearchBooks();
-                //searchBooks.MdiParent = this;
+                searchBooks.MdiParent = this;
             }
             searchBooks.Show();
         }
@@ -185,6 +197,11 @@ namespace Lib_Mana_Sys
 
         private void 个人中心ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Main.user.Pri == Privilege.游客)
+            {
+                MessageBox.Show("游客无法进入此空间", "系统通知", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             if (infocenter == null || infocenter.IsDisposed)
             {
                 infocenter = new InfoCenter();
@@ -204,12 +221,24 @@ namespace Lib_Mana_Sys
 
         private void 记录查询ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!Main.priorityOver(Privilege.学生)) return;
             if(recordSearch==null || recordSearch.IsDisposed)
             {
                 recordSearch = new RecordSearch();
                 recordSearch.MdiParent = this;
             }
             recordSearch.Show();
+        }
+
+        private void 修改图书ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (!Main.priorityOver(Privilege.学生)) return;
+            if (bookAlter == null || bookAlter.IsDisposed)
+            {
+                bookAlter = new BookAlter();
+                bookAlter.MdiParent = this;
+            }
+            bookAlter.Show();
         }
     }
 }

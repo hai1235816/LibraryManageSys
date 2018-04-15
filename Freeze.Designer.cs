@@ -41,6 +41,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(12, 29);
@@ -51,6 +52,7 @@
             // 
             // IDtxt
             // 
+            this.IDtxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.IDtxt.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.IDtxt.Location = new System.Drawing.Point(16, 66);
             this.IDtxt.Name = "IDtxt";
@@ -61,6 +63,7 @@
             // 
             // search
             // 
+            this.search.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.search.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.search.Location = new System.Drawing.Point(16, 215);
             this.search.Name = "search";
@@ -72,6 +75,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(12, 120);
@@ -82,6 +86,7 @@
             // 
             // state
             // 
+            this.state.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.state.AutoSize = true;
             this.state.Font = new System.Drawing.Font("楷体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.state.Location = new System.Drawing.Point(123, 123);
@@ -92,6 +97,7 @@
             // 
             // quit退出
             // 
+            this.quit退出.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.quit退出.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.quit退出.Location = new System.Drawing.Point(82, 273);
             this.quit退出.Name = "quit退出";
@@ -103,6 +109,7 @@
             // 
             // opt
             // 
+            this.opt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.opt.Location = new System.Drawing.Point(132, 218);
             this.opt.Name = "opt";
             this.opt.Size = new System.Drawing.Size(75, 23);
@@ -113,6 +120,7 @@
             // 
             // Days
             // 
+            this.Days.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Days.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Days.FormattingEnabled = true;
             this.Days.Items.AddRange(new object[] {
@@ -129,6 +137,7 @@
             // 
             // freezetiplb
             // 
+            this.freezetiplb.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.freezetiplb.AutoSize = true;
             this.freezetiplb.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.freezetiplb.Location = new System.Drawing.Point(12, 167);

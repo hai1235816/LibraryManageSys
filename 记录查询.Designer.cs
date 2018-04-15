@@ -40,9 +40,10 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("楷体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(3, 21);
+            this.label1.Location = new System.Drawing.Point(17, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(88, 16);
             this.label1.TabIndex = 0;
@@ -50,7 +51,8 @@
             // 
             // DurDaystxt
             // 
-            this.DurDaystxt.Location = new System.Drawing.Point(97, 21);
+            this.DurDaystxt.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.DurDaystxt.Location = new System.Drawing.Point(111, 32);
             this.DurDaystxt.Name = "DurDaystxt";
             this.DurDaystxt.Size = new System.Drawing.Size(75, 21);
             this.DurDaystxt.TabIndex = 1;
@@ -59,18 +61,23 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(210, 21);
+            this.dataGridView1.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.dataGridView1.Location = new System.Drawing.Point(212, 20);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(443, 221);
+            this.dataGridView1.Size = new System.Drawing.Size(474, 236);
             this.dataGridView1.TabIndex = 2;
             // 
             // searchbtn
             // 
+            this.searchbtn.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.searchbtn.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.searchbtn.Location = new System.Drawing.Point(33, 203);
+            this.searchbtn.Location = new System.Drawing.Point(47, 214);
             this.searchbtn.Name = "searchbtn";
             this.searchbtn.Size = new System.Drawing.Size(75, 27);
             this.searchbtn.TabIndex = 3;
@@ -80,9 +87,10 @@
             // 
             // AllRec
             // 
+            this.AllRec.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.AllRec.AutoSize = true;
             this.AllRec.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.AllRec.Location = new System.Drawing.Point(33, 62);
+            this.AllRec.Location = new System.Drawing.Point(47, 73);
             this.AllRec.Name = "AllRec";
             this.AllRec.Size = new System.Drawing.Size(111, 24);
             this.AllRec.TabIndex = 4;
@@ -92,9 +100,10 @@
             // 
             // HistoryRec
             // 
+            this.HistoryRec.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.HistoryRec.AutoSize = true;
             this.HistoryRec.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.HistoryRec.Location = new System.Drawing.Point(33, 104);
+            this.HistoryRec.Location = new System.Drawing.Point(47, 115);
             this.HistoryRec.Name = "HistoryRec";
             this.HistoryRec.Size = new System.Drawing.Size(111, 24);
             this.HistoryRec.TabIndex = 5;
@@ -104,9 +113,10 @@
             // 
             // NewRec
             // 
+            this.NewRec.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.NewRec.AutoSize = true;
             this.NewRec.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.NewRec.Location = new System.Drawing.Point(33, 146);
+            this.NewRec.Location = new System.Drawing.Point(47, 157);
             this.NewRec.Name = "NewRec";
             this.NewRec.Size = new System.Drawing.Size(111, 24);
             this.NewRec.TabIndex = 6;
@@ -119,7 +129,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(672, 271);
+            this.ClientSize = new System.Drawing.Size(700, 292);
             this.Controls.Add(this.NewRec);
             this.Controls.Add(this.HistoryRec);
             this.Controls.Add(this.AllRec);
@@ -127,6 +137,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.DurDaystxt);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "RecordSearch";
             this.Text = "记录查询";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
